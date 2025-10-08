@@ -218,7 +218,7 @@ h1 {
  * ===== 送出按鈕樣式 (固定在底部) =====
  */
 #submit-button {
-    /* 重點修改 2: 固定定位 */
+    /* 固定定位 */
     position: fixed; 
     bottom: 0; 
     left: 0; 
@@ -302,7 +302,7 @@ h1 {
 
 /* 新增：被選中的贈品按鈕樣式 */
 .freebie-choice-btn.selected {
-    /* 修正：讓重複點選時有視覺回饋，不被鎖定 */
+    /* 修正：確保重複點選時有視覺回饋，不被鎖定 */
     border: 3px solid #ff5722 !important; /* 顯眼的橘紅色邊框 */
     background-color: #fce2e2 !important; /* 非常淺的粉色背景 */
     color: #333 !important; /* 文字變深 */
