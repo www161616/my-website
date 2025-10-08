@@ -333,19 +333,38 @@ h1 {
   transform: none;
 }
 
-/* ===== 防止連點 + / - 按鈕導致畫面抖動 ===== */
-button, 
-input, 
-select, 
-textarea {
-  touch-action: manipulation; /* ✅ 阻止雙擊縮放 */
-  -webkit-tap-highlight-color: transparent; /* ✅ 移除點擊灰框 */
+/* ===== 修正快速點擊 + / - 會造成畫面抖動的問題 ===== */
+
+/* 禁止點擊時 input 聚焦閃爍鍵盤 */
+.quantity-control input[type="number"] {
+  pointer-events: none; /* ✅ 防止 focus 觸發鍵盤 */
 }
 
-/* 特別針對 quantity 按鈕再強化 */
+/* 防止 hover/active 時高度變化 */
 .qty-btn {
-  -webkit-user-select: none; /* ✅ 禁止選取文字 */
+  -webkit-user-select: none;
   user-select: none;
   touch-action: manipulation;
-  transform: translateZ(0); /* ✅ 避免點擊時畫面重繪 */
+  transform: translateZ(0);
+  will-change: transform;
+  border: none !important;
+  outline: none !important;
+  transition: none !important; /* ✅ 禁止動畫導致重排 */
+}
+
+/* 點擊時略微縮放視覺，不會重排 */
+.qty-btn:active {
+  transform: scale(0.96);
+}
+
+/* 防止文字選取造成閃動 */
+body, button {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* 防止連點時畫面重排 */
+.quantity-control {
+  height: 36px; /* ✅ 鎖定固定高度 */
+  line-height: 36px;
 }
