@@ -300,6 +300,16 @@ h1 {
     transition: background-color 0.3s;
 }
 
+/* 新增：被選中的贈品按鈕樣式 */
+.freebie-choice-btn.selected {
+    border: 3px solid #ff5722 !important; /* 顯眼的橘紅色邊框 */
+    background-color: #fce2e2 !important; /* 非常淺的粉色背景 */
+    color: #333 !important; /* 文字變深 */
+    font-weight: bold;
+    padding: 5px 9px; /* 調整內邊距以適應邊框 */
+}
+
+
 .freebie-options button:hover {
     background-color: #00a300;
 }
