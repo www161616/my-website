@@ -65,6 +65,7 @@ async function initializeLiff(liffId) {
             submitButton.addEventListener('click', checkOrderEligibility);
         }
 
+        // 主頁面 + / - 按鈕的事件綁定
         const quantityButtons = document.querySelectorAll('.qty-btn');
         quantityButtons.forEach(button => {
             button.addEventListener('click', handleQuantityChange);
@@ -80,12 +81,15 @@ function handleQuantityChange(event) {
     const itemId = button.dataset.id;
     const inputElement = document.getElementById(itemId);
     
-    if (!inputElement) return;
+    // 如果 inputElement 不存在，則無法點擊，這是主頁面按鈕失效的原因之一
+    if (!inputElement) {
+        console.error(`Error: Input element with ID "${itemId}" not found.`);
+        return; 
+    }
 
     let currentQty = parseInt(inputElement.value) || 0;
     
-    // 檢查是否有這個 class，是的話就執行 +1
-    if (button.classList.contains('plus-btn')) { 
+    if (button.classList.contains('plus-btn')) {
         currentQty += 1;
     } else if (button.classList.contains('minus-btn')) {
         currentQty = Math.max(0, currentQty - 1);
@@ -104,8 +108,8 @@ function checkOrderEligibility() {
 
     // 1. 統計訂單總數與分類購買數量
     for (const id in menu) {
-        // 這行是從主頁面 input 抓數量，如果 HTML 遺失 id 會失敗
         const inputElement = document.getElementById(id);
+        // 跳過 HTML 中沒有對應 input 的 ID，避免錯誤
         if (!inputElement) continue; 
         
         const qty = parseInt(inputElement.value) || 0;
@@ -220,7 +224,7 @@ function showFreebieModal(totalFreebieCount) {
             const currentTally = chosenFreebieItems.filter(id => id === chosenItemId).length;
             const maxCount = freebieGroups[categoryId];
 
-            // 核心修正邏輯：現在按鈕有兩種行為，根據 currentTally 決定是新增還是取消一個數量。
+            // 核心修正邏輯：如果該品項目前有被選（tally > 0），則點擊是取消一個數量；否則就是新增數量。
             if (currentTally > 0) { 
                 // ===== 取消選擇邏輯 (點擊即取消一個數量) =====
                 
