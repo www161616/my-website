@@ -204,7 +204,7 @@ function showFreebieModal(totalFreebieCount) {
     Object.keys(freebieGroups).forEach(id => categorySelectionCounts[id] = 0);
 
 
-    // 綁定選擇按鈕事件 - 新增雙向邏輯 (選取/取消選取)
+    // 綁定選擇按鈕事件 - 修正邏輯
     modal.querySelectorAll('.freebie-choice-btn').forEach(button => {
         button.addEventListener('click', (event) => {
             const button = event.currentTarget;
@@ -215,10 +215,9 @@ function showFreebieModal(totalFreebieCount) {
             const currentTally = chosenFreebieItems.filter(id => id === chosenItemId).length;
             const maxCount = freebieGroups[categoryId];
 
-
-            if (currentTally > 0 && button.classList.contains('selected')) { 
-                // ===== 取消選擇邏輯 (只要已選過一次，就可以取消) =====
-                // 必須同時檢查 currentTally > 0 和 button.classList.contains('selected')，確保能執行取消動作
+            // 核心修正邏輯：如果該品項目前有被選（tally > 0），則點擊是取消一個數量；否則就是新增數量。
+            if (currentTally > 0) { 
+                // ===== 取消選擇邏輯 (點擊即取消一個數量) =====
                 
                 // 1. 從已選陣列中移除第一個匹配的項目 (只移除一個)
                 const index = chosenFreebieItems.indexOf(chosenItemId);
@@ -237,7 +236,7 @@ function showFreebieModal(totalFreebieCount) {
                 }
 
             } else {
-                // ===== 新增選擇邏輯 (允許重複點選) =====
+                // ===== 新增選擇邏輯 (只在該品項數量為 0 時，才考慮新增) =====
                 
                 // 檢查是否還有總免費數量
                 if (currentFreebieSelection < totalFreebieCount) { // 檢查總數量
