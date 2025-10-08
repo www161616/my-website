@@ -84,7 +84,8 @@ function handleQuantityChange(event) {
 
     let currentQty = parseInt(inputElement.value) || 0;
     
-    if (button.classList.contains('plus-btn')) {
+    // 檢查是否有這個 class，是的話就執行 +1
+    if (button.classList.contains('plus-btn')) { 
         currentQty += 1;
     } else if (button.classList.contains('minus-btn')) {
         currentQty = Math.max(0, currentQty - 1);
@@ -103,7 +104,11 @@ function checkOrderEligibility() {
 
     // 1. 統計訂單總數與分類購買數量
     for (const id in menu) {
-        const qty = parseInt(document.getElementById(id).value) || 0;
+        // 這行是從主頁面 input 抓數量，如果 HTML 遺失 id 會失敗
+        const inputElement = document.getElementById(id);
+        if (!inputElement) continue; 
+        
+        const qty = parseInt(inputElement.value) || 0;
         if (qty > 0) {
             pendingOrder.push({ id: id, name: menu[id].name, qty: qty, price: menu[id].price, category: menu[id].category });
             
@@ -215,7 +220,7 @@ function showFreebieModal(totalFreebieCount) {
             const currentTally = chosenFreebieItems.filter(id => id === chosenItemId).length;
             const maxCount = freebieGroups[categoryId];
 
-            // 核心修正邏輯：現在按鈕有兩種行為，根據 currentTally 決定是新增還是取消一個數量
+            // 核心修正邏輯：現在按鈕有兩種行為，根據 currentTally 決定是新增還是取消一個數量。
             if (currentTally > 0) { 
                 // ===== 取消選擇邏輯 (點擊即取消一個數量) =====
                 
@@ -351,3 +356,64 @@ async function submitFinalOrder() {
     if (chosenFreebieItems.length > 0) {
         
         let freebieTotalDiscount = 0;
+        let freebieSummary = {};    
+        
+        chosenFreebieItems.forEach(id => {
+            const freebie = menu[id];
+            freebieTotalDiscount += freebie.price;
+            freebieSummary[freebie.name] = (freebieSummary[freebie.name] || 0) + 1;
+        });
+
+        discountAmount = freebieTotalDiscount;
+        
+        // 將贈品細節加入摘要
+        for (const name in freebieSummary) {
+             finalOrderDetails.push(`🎁 贈品: ${name} x ${freebieSummary[name]}`);
+        }
+    }
+
+    let finalPrice = subtotal - discountAmount;
+    let discountText = discountAmount > 0 ? `\n買5送1優惠折扣: -$${discountAmount} 元` : "";
+
+    // 3. 建立最終摘要
+    let orderSummary = "--- 您的訂單明細 ---\n";
+    orderSummary += finalOrderDetails.join('\n');
+    orderSummary += `\n------------------\n商品小計: $${subtotal} 元`;
+    orderSummary += discountText;
+    orderSummary += `\n總金額: $${finalPrice} 元`;
+    orderSummary += "\n------------------";
+
+
+    const orderData = {
+        customerName: customerName,
+        orderSummary: orderSummary,
+        totalPrice: finalPrice
+    };
+
+    try {
+        await fetch(GAS_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(orderData)
+        });
+
+        if (liff.isInClient()) {
+            await liff.sendMessages([{
+                'type': 'text',
+                'text': `【新訂單 - ${customerName}】\n${orderSummary}`
+            }]);
+            alert("訂單已成功送出並記錄！");
+            liff.closeWindow();
+        } else {
+             alert(`訂單已成功送出並記錄！\n\n${orderSummary}`);
+        }
+    } catch (error) {
+        console.error("傳送訂單失敗:", error);
+        alert("傳送訂單失敗，請稍後再試。");
+    } finally {
+        submitButton.disabled = false;
+        submitButton.innerText = "確認送出訂單";
+    }
+
+}
