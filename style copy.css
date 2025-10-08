@@ -1,0 +1,255 @@
+/*
+ * ===== 全域樣式與排版 =====
+ */
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f9; /* 淺灰色背景 */
+    color: #333;
+}
+
+h1 {
+    color: #a04000; /* 咖啡色標題 */
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #a04000;
+    padding-bottom: 10px;
+}
+
+/* 菜單分類標題樣式 */
+.menu-category-title {
+    background-color: #f0f0f5; /* 淺色背景區分 */
+    color: #6a6a6a;
+    /* 【修正點 1】移除負邊距，確保在不同容器中不會產生水平捲軸 */
+    padding: 10px 15px; 
+    margin: 20px 0 10px 0; /* 改為標準邊距 */
+    font-size: 1.2em;
+    font-weight: bold;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.discount-tag {
+    background-color: #00B900;
+    color: white;
+    font-size: 0.7em;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: normal;
+}
+
+.new-tag {
+    background-color: #ff5722; /* 橘紅色 */
+    color: white;
+    font-size: 0.7em;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-weight: normal;
+    margin-left: 5px;
+}
+
+/*
+ * ===== 菜單項目樣式 (Menu Item) =====
+ */
+.menu-item {
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.item-details {
+    display: flex; 
+    align-items: center;
+    flex-grow: 1; /* 讓細節佔據大部分空間 */
+}
+
+.item-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%; /* 圓形圖片 */
+    margin-right: 15px;
+    border: 2px solid #a04000; /* 咖啡色邊框 */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.item-info {
+    display: flex; 
+    flex-direction: column;
+}
+
+.item-name {
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #555;
+}
+
+.item-price {
+    margin: 5px 0 0 0;
+    font-size: 0.95em;
+    color: #888;
+}
+
+/* ===== 數量控制組件樣式 (Quantity Control) ===== */
+.quantity-control {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-left: 10px;
+}
+
+.quantity-control input[type="number"] {
+    width: 40px;
+    padding: 8px 0;
+    border: none;
+    text-align: center;
+    font-size: 1em;
+    height: 36px;
+    box-sizing: border-box; 
+    background-color: #f9f9f9;
+    
+    /* 移除數字輸入框箭頭 (Chrome/Safari) */
+    -webkit-appearance: none;
+    margin: 0;
+
+    /* 【修正點 2】修正 Firefox 隱藏箭頭的語法 */
+    -moz-appearance: textfield; 
+}
+
+
+.qty-btn {
+    width: 36px;
+    height: 36px;
+    background-color: #a04000; 
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 0;
+    transition: background-color 0.1s;
+}
+
+.qty-btn:hover {
+    background-color: #7a3000;
+}
+
+.qty-btn:active {
+    background-color: #552000;
+}
+
+.minus-btn {
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.plus-btn {
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/*
+ * ===== 送出按鈕樣式 =====
+ */
+#submit-button {
+    width: 100%;
+    padding: 15px;
+    background-color: #a04000;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
+
+#submit-button:hover:not(:disabled) {
+    background-color: #7a3000;
+}
+
+#submit-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+
+/*
+ * ===== 贈品選擇彈出視窗的樣式 (Modal) =====
+ */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 85%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.freebie-options {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* 讓按鈕在空間不足時換行 */
+    gap: 10px; /* 按鈕間的間距 */
+    margin-top: 15px;
+}
+
+.freebie-options button {
+    background-color: #00B900;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    flex-grow: 0; /* 不強制等寬 */
+    transition: background-color 0.3s;
+}
+
+.freebie-options button:hover {
+    background-color: #00a300;
+}
+
+#confirm-freebie-btn {
+    width: 100%;
+    background-color: #00B900;
+    color: white;
+    border: none;
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#confirm-freebie-btn:disabled {
+    background-color: #aaa !important;
+    cursor: not-allowed;
+}

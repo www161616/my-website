@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>包子媽點餐單</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+</head>
+</head>
+<body>
+
+    <h1>包子媽點餐單</h1>
+
+    <div id="menu">
+        <div class="menu-item">
+            <p>鮮肉包 (每顆 $25)</p>
+            <input type="number" id="fresh-meat-bun" min="0" value="0" placeholder="請輸入數量">
+        </div>
+
+        <div class="menu-item">
+            <p>梅干菜肉包 (每顆 $30)</p>
+            <input type="number" id="mustard-green-bun" min="0" value="0" placeholder="請輸入數量">
+        </div>
+    </div>
+
+    <hr>
+    
+    <button id="submit-button">確認送出訂單</button>
+
+<div id="freebie-modal" class="modal-overlay">
+    <div class="modal-content">
+        </div>
+</div>
+
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    
+    <script src="script.js"></script>
+
+    
+</body>
+</html>

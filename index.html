@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <title>包子媽點餐單</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <h1>包子媽點餐單</h1>
+
+    <div id="menu">
+        
+        <h2 class="menu-category-title">老麵饅頭 <span class="discount-tag">買5送1優惠</span></h2>
+        
+        <div class="menu-item">
+            <div class="item-details">
+                <img src="https://via.placeholder.com/120x120?text=山東饅頭" alt="山東饅頭" class="item-image">
+                <div class="item-info">
+                    <p class="item-name">山東饅頭</p>
+                    <p class="item-tag vegetarian">素食</p>
+                    <p class="item-price">每顆 $21</p>
+                </div>
+            </div>
+            <div class="quantity-control">
+                <button class="qty-btn minus-btn" data-id="shandong-mantou">-</button>
+                <input type="number" id="shandong-mantou" min="0" value="0" placeholder="數量" readonly>
+                <button class="qty-btn plus-btn" data-id="shandong-mantou">+</button>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <div class="item-details">
+                <img src="https://via.placeholder.com/120x120?text=紅糖饅頭" alt="紅糖饅頭" class="item-image">
+                <div class="item-info">
+                    <p class="item-name">紅糖饅頭</p>
+                    <p class="item-tag vegetarian">素食</p>
+                    <p class="item-price">每顆 $21</p>
+                </div>
+            </div>
+            <div class="quantity-control">
+                <button class="qty-btn minus-btn" data-id="brown-sugar-mantou">-</button>
+                <input type="number" id="brown-sugar-mantou" min="0" value="0" placeholder="數量" readonly>
+                <button class="qty-btn plus-btn" data-id="brown-sugar-mantou">+</button>
+            </div>
+        </div>
+        
+        <div class="menu-item">
+            <div class="item-details">
+                <img src="https://via.placeholder.com/120x120?text=微甜饅頭" alt="微甜饅頭" class="item-image">
+                <div class="item-info">
+                    <p class="item-name">微甜饅頭</p>
+                    <p class="item-tag vegetarian">素食</p>
+                    <p class="item-price">每顆 $21</p>
+                </div>
+            </div>
+            <div class="quantity-control">
+                <button class="qty-btn minus-btn" data-id="sweet-potato-mantou">-</button>
+                <input type="number" id="sweet-potato-mantou" min="0" value="0" placeholder="數量" readonly>
+                <button class="qty-btn plus-btn" data-id="sweet-potato-mantou">+</button>
+            </div>
+        </div>
+        
+        <div class="menu-item">
+            <div class="item-details">
+                <img src="https://via.placeholder.com/120x120?text=芋頭饅頭" alt="芋頭饅頭" class="item-image">
+                <div class="item-info">
+                    <p class="item-name">芋頭饅頭</p>
+                    <p class="item-tag vegetarian">素食</p>
+                    <p class="item-price">每顆 $21</p>
+                </div>
+            </div>
+            <div class="quantity-control">
+                <button class="qty-btn minus-btn" data-id="yam-mantou">-</button>
+                <input type="number" id="yam-mantou" min="0" value="0" placeholder="數量" readonly>
+                <button class="qty-btn plus-btn" data-id="yam-mantou">+</button>
+            </div>
+        </div>
+        
+        <div class="menu-item">
+            <div class="item-details">
+                <img src="https://via.placeholder.com/120x120?text=全麥饅頭" alt="全麥饅頭" class="item-image">
+                <div class="item-info">
+                    <p class="item-name">全麥饅頭</p>
+                    <p class="item-tag vegetarian">素食</p>
+                    <p class="item-price">每顆 $21</p>
+                </div>
+            </div>
+            <div class="quantity-control">
+                <button class="qty-btn minus-btn" data-id="whole-wheat-mantou">-</button>
+                <input type="number" id="whole-wheat-mantou" min="0" value="0" placeholder="數量" readonly>
+                <button class="qty-btn plus-btn" data-id="whole-wheat-mantou">+</button>
+            </div>
+        </div>
+        
+        <div class="menu-item">
+            <div class="item-details">
+                <img src="https://via.placeholder.com/120x120?text=五穀雜糧" alt="五穀雜糧" class="item-image">
+                <div class="item-info">
+                    <p class="item-name">五穀雜糧</p>
+                    <p class="item-tag vegetarian">素食</p>
+                    <p class="item-price">每顆 $27</p>
+                </div>
+            </div>
+            <div class="quantity-control">
+                <button class="qty-btn minus-btn" data-id="five-grain-mantou">-</button>
+                <input type="number" id="five-grain-mantou" min="0" value="0" placeholder="數量" readonly>
+                <button class="qty-btn plus-btn" data-id="five-grain-mantou">+</button>
+            </div>
+        </div>
+
+
+        <h2 class="menu-category-title">老麵包子 <span class="discount-tag">買5送1優惠</span></h2>
+        
+        <div class="menu-item">
+            <div class="item-details">
+                <img src="https://via.placeholder.com/120x120?text=剝皮辣椒包" alt="剝皮辣椒包" class="item-image">
+                <div class="item-info">
+                    <p class="item-name">剝皮辣椒包 <span class="new-tag">新品</span></p>
+                    <p class="item-tag meat">葷食</p>
+                    <p class="item-price">每顆 $32</p>
+                </div>
+            </div>
+            <div class="quantity-control">
+                <button class="qty-btn minus-btn" data-id="peeled-pepper-bun">-</button>
+                <input type="number" id="peeled-pepper-bun" min="0" value="0" placeholder="數量" readonly>
+                <button class="qty-btn plus-btn" data-id="peeled-pepper-bun">+</button>
+            </div>
+        </div>
+        
+        <div class="menu-item">
+            <div class="item-details">
+                <img src="https://via.placeholder.com/120x120?text=鮮肉包" alt="鮮肉包" class="item-image">
+                <div class="item-info">
+                    <p class="item-name">鮮肉包</p>
+                    <p class="item-tag meat">葷食</p>
+                    <p class="item-price">每顆 $27</p>
+                </div>
+            </div>
+            <div class="quantity-control">
+                <button class="qty-btn minus-btn" data-id="fresh-meat-bun">-</button>
+                <input type="number" id="fresh-meat-bun" min="0" value="0" placeholder="數量" readonly>
+                <button class="qty-btn plus-btn" data-id="fresh-meat-bun">+</button>
+            </div>
+        </div>
+        
+        <div class="menu-item">
+            <div class="item-details">
+                <img src="https://via.placeholder.com/120x120?text=雪裡紅素包" alt="雪裡紅素包" class="item-image">
+                <div class="item-info">
+                    <p class="item-name">雪裡紅素包</p>
+                    <p class="item-tag vegetarian">素食</p>
+                    <p class="item-price">每顆 $27</p>
+                </div>
+            </div>
+            <div class="quantity-control">
+                <button class="qty-btn minus-btn" data-id="snow-vegetable-bun">-</button>
+                <input type="number" id="snow-vegetable-bun" min="0" value="0" placeholder="數量" readonly>
+                <button class="qty-btn plus-btn" data-id="snow-vegetable-bun">+</button>
+            </div>
+        </div>
+        
+        <div class="menu-item">
+            <div class="item-details">
+                <img src="https://via.placeholder.com/120x120?text=香椿竹筍包" alt="香椿竹筍包" class="item-image">
+                <div class="item-info">
+                    <p class="item-name">香椿竹筍包</p>
+                    <p class="item-tag vegetarian">素食</p>
+                    <p class="item-price">每顆 $27</p>
+                </div>
+            </div>
+            <div class="quantity-control">
+                <button class="qty-btn minus-btn" data-id="bamboo-shoot-bun">-</button>
+                <input type="number" id="bamboo-shoot-bun" min="0" value="0" placeholder="數量" readonly>
+                <button class="qty-btn plus-btn" data-id="bamboo-shoot-bun">+</button>
+            </div>
+        </div>
+        
+        <div class="menu-item">
+            <div class="item-details">
+                <img src="https://via.placeholder.com/120x120?text=梅干菜肉包" alt="梅干菜肉包" class="item-image">
+                <div class="item-info">
+                    <p class="item-name">梅干菜肉包</p>
+                    <p class="item-tag meat">葷食</p>
+                    <p class="item-price">每顆 $27</p>
+                </div>
+            </div>
+            <div class="quantity-control">
+                <button class="qty-btn minus-btn" data-id="mustard-green-bun">-</button>
+                <input type="number" id="mustard-green-bun" min="0" value="0" placeholder="數量" readonly>
+                <button class="qty-btn plus-btn" data-id="mustard-green-bun">+</button>
+            </div>
+        </div>
+        
+        <div class="menu-item">
+            <div class="item-details">
+                <img src="https://via.placeholder.com/120x120?text=高麗菜包" alt="高麗菜包" class="item-image">
+                <div class="item-info">
+                    <p class="item-name">高麗菜包</p>
+                    <p class="item-tag vegetarian">素食</p>
+                    <p class="item-price">每顆 $27</p>
+                </div>
+            </div>
+            <div class="quantity-control">
+                <button class="qty-btn minus-btn" data-id="cabbage-bun">-</button>
+                <input type="number" id="cabbage-bun" min="0" value="0" placeholder="數量" readonly>
+                <button class="qty-btn plus-btn" data-id="cabbage-bun">+</button>
+            </div>
+        </div>
+        
+        <div class="menu-item">
+            <div class="item-details">
+                <img src="https://via.placeholder.com/120x120?text=蔥花捲" alt="蔥花捲" class="item-image">
+                <div class="item-info">
+                    <p class="item-name">蔥花捲</p>
+                    <p class="item-tag meat">葷食</p>
+                    <p class="item-price">每顆 $27</p>
+                </div>
+            </div>
+            <div class="quantity-control">
+                <button class="qty-btn minus-btn" data-id="chive-bun">-</button>
+                <input type="number" id="chive-bun" min="0" value="0" placeholder="數量" readonly>
+                <button class="qty-btn plus-btn" data-id="chive-bun">+</button>
+            </div>
+        </div>
+        
+        <div class="menu-item">
+            <div class="item-details">
+                <img src="https://via.placeholder.com/120x120?text=芝麻包" alt="芝麻包" class="item-image">
+                <div class="item-info">
+                    <p class="item-name">芝麻包</p>
+                    <p class="item-tag vegetarian">素食</p>
+                    <p class="item-price">每顆 $27</p>
+                </div>
+            </div>
+            <div class="quantity-control">
+                <button class="qty-btn minus-btn" data-id="sesame-bun">-</button>
+                <input type="number" id="sesame-bun" min="0" value="0" placeholder="數量" readonly>
+                <button class="qty-btn plus-btn" data-id="sesame-bun">+</button>
+            </div>
+        </div>
+        
+        <div class="menu-item">
+            <div class="item-details">
+                <img src="https://via.placeholder.com/120x120?text=紅豆包" alt="紅豆包" class="item-image">
+                <div class="item-info">
+                    <p class="item-name">紅豆包</p>
+                    <p class="item-tag vegetarian">素食</p>
+                    <p class="item-price">每顆 $27</p>
+                </div>
+            </div>
+            <div class="quantity-control">
+                <button class="qty-btn minus-btn" data-id="red-bean-bun">-</button>
+                <input type="number" id="red-bean-bun" min="0" value="0" placeholder="數量" readonly>
+                <button class="qty-btn plus-btn" data-id="red-bean-bun">+</button>
+            </div>
+        </div>
+        
+        <div class="menu-item">
+            <div class="item-details">
+                <img src="https://via.placeholder.com/120x120?text=芋泥地瓜包" alt="芋泥地瓜包" class="item-image">
+                <div class="item-info">
+                    <p class="item-name">芋泥地瓜包</p>
+                    <p class="item-tag vegetarian">素食</p>
+                    <p class="item-price">每顆 $27</p>
+                </div>
+            </div>
+            <div class="quantity-control">
+                <button class="qty-btn minus-btn" data-id="taro-mash-bun">-</button>
+                <input type="number" id="taro-mash-bun" min="0" value="0" placeholder="數量" readonly>
+                <button class="qty-btn plus-btn" data-id="taro-mash-bun">+</button>
+            </div>
+        </div>
+
+
+        <h2 class="menu-category-title">起司捲 <span class="discount-tag">買5送1優惠</span></h2>
+        
+        <div class="menu-item">
+            <div class="item-details">
+                <img src="https://via.placeholder.com/120x120?text=牛奶起司捲" alt="牛奶起司捲" class="item-image">
+                <div class="item-info">
+                    <p class="item-name">牛奶起司捲</p>
+                    <p class="item-tag vegetarian">蛋奶素</p>
+                    <p class="item-price">每顆 $32</p>
+                </div>
+            </div>
+            <div class="quantity-control">
+                <button class="qty-btn minus-btn" data-id="milk-cheese-roll">-</button>
+                <input type="number" id="milk-cheese-roll" min="0" value="0" placeholder="數量" readonly>
+                <button class="qty-btn plus-btn" data-id="milk-cheese-roll">+</button>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <div class="item-details">
+                <img src="https://via.placeholder.com/120x120?text=紅糖起司捲" alt="紅糖起司捲" class="item-image">
+                <div class="item-info">
+                    <p class="item-name">紅糖起司捲</p>
+                    <p class="item-tag vegetarian">蛋奶素</p>
+                    <p class="item-price">每顆 $32</p>
+                </div>
+            </div>
+            <div class="quantity-control">
+                <button class="qty-btn minus-btn" data-id="brown-sugar-cheese-roll">-</button>
+                <input type="number" id="brown-sugar-cheese-roll" min="0" value="0" placeholder="數量" readonly>
+                <button class="qty-btn plus-btn" data-id="brown-sugar-cheese-roll">+</button>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <div class="item-details">
+                <img src="https://via.placeholder.com/120x120?text=德國香腸起司" alt="德國香腸起司" class="item-image">
+                <div class="item-info">
+                    <p class="item-name">德國香腸起司</p>
+                    <p class="item-tag meat">葷食</p>
+                    <p class="item-price">每顆 $32</p>
+                </div>
+            </div>
+            <div class="quantity-control">
+                <button class="qty-btn minus-btn" data-id="sausage-roll">-</button>
+                <input type="number" id="sausage-roll" min="0" value="0" placeholder="數量" readonly>
+                <button class="qty-btn plus-btn" data-id="sausage-roll">+</button>
+            </div>
+        </div>
+        
+        <div class="menu-item">
+            <div class="item-details">
+                <img src="https://via.placeholder.com/120x120?text=綜合起司小饅頭(9入)" alt="綜合起司小饅頭" class="item-image">
+                <div class="item-info">
+                    <p class="item-name">綜合起司小饅頭 (9入)</p>
+                    <p class="item-tag vegetarian">蛋奶素</p>
+                    <p class="item-price">$95</p>
+                </div>
+            </div>
+            <div class="quantity-control">
+                <button class="qty-btn minus-btn" data-id="assorted-mini">-</button>
+                <input type="number" id="assorted-mini" min="0" value="0" placeholder="數量" readonly>
+                <button class="qty-btn plus-btn" data-id="assorted-mini">+</button>
+            </div>
+        </div>
+
+
+        <h2 class="menu-category-title">小饅頭 (袋裝/盒裝)</h2>
+
+        <div class="menu-item">
+            <div class="item-details">
+                <img src="https://via.placeholder.com/120x120?text=彩色小饅頭" alt="彩色小饅頭" class="item-image">
+                <div class="item-info">
+                    <p class="item-name">彩色小饅頭 (400克)</p>
+                    <p class="item-tag vegetarian">蛋奶素</p>
+                    <p class="item-price">$145</p>
+                </div>
+            </div>
+            <div class="quantity-control">
+                <button class="qty-btn minus-btn" data-id="colorful-mini">-</button>
+                <input type="number" id="colorful-mini" min="0" value="0" placeholder="數量" readonly>
+                <button class="qty-btn plus-btn" data-id="colorful-mini">+</button>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <div class="item-details">
+                <img src="https://via.placeholder.com/120x120?text=牛奶小饅頭" alt="牛奶小饅頭" class="item-image">
+                <div class="item-info">
+                    <p class="item-name">牛奶小饅頭 (400克)</p>
+                    <p class="item-tag vegetarian">蛋奶素</p>
+                    <p class="item-price">$165</p>
+                </div>
+            </div>
+            <div class="quantity-control">
+                <button class="qty-btn minus-btn" data-id="milk-mini">-</button>
+                <input type="number" id="milk-mini" min="0" value="0" placeholder="數量" readonly>
+                <button class="qty-btn plus-btn" data-id="milk-mini">+</button>
+            </div>
+        </div>
+        
+    </div>
+
+    <hr>
+    
+    <button id="submit-button">確認送出訂單</button>
+
+    <div id="freebie-modal" class="modal-overlay">
+        <div class="modal-content">
+            </div>
+    </div>
+
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    
+    <script src="script.js"></script>
+
+</body>
+</html>
