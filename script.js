@@ -45,8 +45,8 @@ const eligibleCategories = [
 
 let customerName = "";
 let pendingOrder = [];
-let freebieGroups = {}; 
-let chosenFreebieItems = []; 
+let freebieGroups = {};    
+let chosenFreebieItems = [];    
 
 document.addEventListener("DOMContentLoaded", function() {
     initializeLiff(myLiffId);
@@ -96,7 +96,7 @@ function handleQuantityChange(event) {
 
 function checkOrderEligibility() {
     pendingOrder = [];
-    let totalDiscountItemQty = {}; 
+    let totalDiscountItemQty = {};    
     let totalFreebieCount = 0;
 
     const eligibleCategoryIds = eligibleCategories.map(c => c.id);
@@ -151,7 +151,7 @@ function showFreebieModal(totalFreebieCount) {
     const generateCategoryOptions = (categoryId) => {
         return Object.entries(menu)
             .filter(([id, item]) => item.category === categoryId)
-            .map(([id, item]) => 
+            .map(([id, item]) =>    
                 `<button class="freebie-choice-btn" data-item-id="${id}" data-category-id="${categoryId}">${item.name}</button>`
             ).join('');
     };
@@ -164,15 +164,15 @@ function showFreebieModal(totalFreebieCount) {
         if (count > 0) {
              const categoryOptions = generateCategoryOptions(cat.id);
              selectionSections += `
-                <div class="freebie-group" data-category-id="${cat.id}">
-                    <h4>${cat.name}：共 ${count} 顆免費</h4>
-                    <p>請選擇您的 ${cat.name} 贈品 (已選: <span class="chosen-count-display" data-category-id="${cat.id}">0</span>/${count})</p>
-                    <div class="freebie-options">
-                        ${categoryOptions}
-                    </div>
-                </div>
-                <hr style="margin: 15px 0;">
-             `;
+                 <div class="freebie-group" data-category-id="${cat.id}">
+                     <h4>${cat.name}：共 ${count} 顆免費</h4>
+                     <p>請選擇您的 ${cat.name} 贈品 (已選: <span class="chosen-count-display" data-category-id="${cat.id}">0</span>/${count})</p>
+                     <div class="freebie-options">
+                         ${categoryOptions}
+                     </div>
+                 </div>
+                 <hr style="margin: 15px 0;">
+               `;
         }
     });
 
@@ -183,62 +183,96 @@ function showFreebieModal(totalFreebieCount) {
         ${selectionSections}
 
         <p style="font-weight: bold;">總計已選擇贈品：<span id="chosen-freebies-summary">無</span></p>
-        <button id="confirm-freebie-btn" disabled style="background-color: #aaa;">確認選擇並送出訂單</button>
+        
+        <div style="display: flex; justify-content: space-around; margin-top: 15px;">
+            <button id="reset-freebie-btn" style="background-color: #aaa; color: white; border: none; padding: 12px 15px; border-radius: 8px; font-weight: bold; flex-grow: 1; margin-right: 10px;">取消所有贈品</button>
+            <button id="confirm-freebie-btn" disabled style="background-color: #aaa; color: white; border: none; padding: 12px 15px; border-radius: 8px; font-weight: bold; flex-grow: 1;">確認選擇並送出訂單</button>
+        </div>
     `;
+    // 注意: HTML 內容已修改，加入 '取消所有贈品' 按鈕，並調整了確認按鈕的樣式
 
     modalContent.innerHTML = htmlContent;
 
     const remainingSpan = document.getElementById('freebie-remaining');
     const summarySpan = document.getElementById('chosen-freebies-summary');
     const confirmBtn = document.getElementById('confirm-freebie-btn');
-    
+    const resetBtn = document.getElementById('reset-freebie-btn'); // 新增: 取消按鈕
+
     let currentFreebieSelection = 0;
     
     let categorySelectionCounts = {};
     Object.keys(freebieGroups).forEach(id => categorySelectionCounts[id] = 0);
 
 
-    // 綁定選擇按鈕事件
+    // 綁定選擇按鈕事件 - 新增雙向邏輯 (選取/取消選取)
     modal.querySelectorAll('.freebie-choice-btn').forEach(button => {
         button.addEventListener('click', (event) => {
-            const chosenItemId = event.target.dataset.itemId;
-            const categoryId = event.target.dataset.categoryId;
+            const button = event.currentTarget;
+            const chosenItemId = button.dataset.itemId;
+            const categoryId = button.dataset.categoryId;
             
+            // 判斷按鈕是否已被選取
+            const isCurrentlySelected = button.classList.contains('selected');
             const maxCount = freebieGroups[categoryId];
-            
-            if (categorySelectionCounts[categoryId] < maxCount) {
-                // 1. 紀錄選擇
-                chosenFreebieItems.push(chosenItemId);
-                categorySelectionCounts[categoryId]++;
-                currentFreebieSelection++;
+
+            if (isCurrentlySelected) {
+                // ===== 取消選擇邏輯 =====
                 
-                // 2. 更新顯示
-                remainingSpan.textContent = totalFreebieCount - currentFreebieSelection;
-                
-                modal.querySelector(`.chosen-count-display[data-category-id="${categoryId}"]`).textContent = categorySelectionCounts[categoryId];
-
-                // 統計總摘要
-                const freebieTally = chosenFreebieItems.reduce((acc, id) => {
-                    const name = menu[id].name;
-                    acc[name] = (acc[name] || 0) + 1;
-                    return acc;
-                }, {});
-
-                const summary = Object.entries(freebieTally)
-                                        .map(([name, count]) => `${name} x ${count}`)
-                                        .join('、');
-
-                summarySpan.textContent = summary;
-
-                // 3. 檢查是否全部選完
-                if (currentFreebieSelection === totalFreebieCount) {
-                    confirmBtn.disabled = false;
-                    confirmBtn.style.backgroundColor = '#00B900';
+                // 1. 從已選陣列中移除第一個匹配的項目
+                const index = chosenFreebieItems.indexOf(chosenItemId);
+                if (index > -1) {
+                    chosenFreebieItems.splice(index, 1); // 移除一個項目
                 }
+                
+                // 2. 更新計數器和樣式
+                categorySelectionCounts[categoryId]--;
+                currentFreebieSelection--;
+                button.classList.remove('selected');
+
             } else {
-                 alert(`您在【${eligibleCategories.find(c => c.id === categoryId).name}】類別的贈品數量已選完囉！`);
+                // ===== 新增選擇邏輯 =====
+                
+                // 檢查是否還有免費數量
+                if (currentFreebieSelection < totalFreebieCount) { // 檢查總數量
+                    if (categorySelectionCounts[categoryId] < maxCount) { // 檢查類別數量
+                        // 1. 紀錄選擇
+                        chosenFreebieItems.push(chosenItemId);
+                        categorySelectionCounts[categoryId]++;
+                        currentFreebieSelection++;
+                        
+                        // 2. 更新樣式
+                        button.classList.add('selected');
+                        
+                    } else {
+                        alert(`您在【${eligibleCategories.find(c => c.id === categoryId).name}】類別的贈品數量已選完囉！`);
+                        return; // 數量已滿，不執行後續更新
+                    }
+                } else {
+                     alert(`您已選滿所有 ${totalFreebieCount} 顆免費贈品！`);
+                     return; // 總數量已滿
+                }
             }
+            
+            // 3. 統一更新 UI
+            updateFreebieModalUI(totalFreebieCount, currentFreebieSelection, categorySelectionCounts, chosenFreebieItems, remainingSpan, summarySpan, confirmBtn);
+
         });
+    });
+
+    // 新增: 綁定「取消所有贈品」事件
+    resetBtn.addEventListener('click', () => {
+        // 1. 重置狀態變數
+        chosenFreebieItems = []; // 清空已選列表
+        currentFreebieSelection = 0; // 總數歸零
+        Object.keys(freebieGroups).forEach(id => categorySelectionCounts[id] = 0); // 類別計數歸零
+
+        // 2. 移除所有按鈕的 'selected' 樣式
+        modal.querySelectorAll('.freebie-choice-btn').forEach(button => {
+            button.classList.remove('selected');
+        });
+
+        // 3. 更新 UI
+        updateFreebieModalUI(totalFreebieCount, currentFreebieSelection, categorySelectionCounts, chosenFreebieItems, remainingSpan, summarySpan, confirmBtn);
     });
 
     // 綁定確認送出事件
@@ -248,6 +282,42 @@ function showFreebieModal(totalFreebieCount) {
 
     // 顯示彈出視窗
     modal.style.display = 'flex';
+}
+
+// 新增：集中更新贈品彈窗 UI 的函數
+function updateFreebieModalUI(totalFreebieCount, currentFreebieSelection, categorySelectionCounts, chosenFreebieItems, remainingSpan, summarySpan, confirmBtn) {
+    // 1. 更新剩餘數量顯示
+    remainingSpan.textContent = totalFreebieCount - currentFreebieSelection;
+    
+    // 2. 更新每個類別已選數量顯示
+    Object.keys(categorySelectionCounts).forEach(categoryId => {
+        const displayElement = document.querySelector(`.chosen-count-display[data-category-id="${categoryId}"]`);
+        if (displayElement) {
+            displayElement.textContent = categorySelectionCounts[categoryId];
+        }
+    });
+
+    // 3. 統計總摘要
+    const freebieTally = chosenFreebieItems.reduce((acc, id) => {
+        const name = menu[id].name;
+        acc[name] = (acc[name] || 0) + 1;
+        return acc;
+    }, {});
+
+    const summary = Object.entries(freebieTally)
+        .map(([name, count]) => `${name} x ${count}`)
+        .join('、');
+
+    summarySpan.textContent = summary || '無';
+
+    // 4. 檢查是否全部選完
+    if (currentFreebieSelection === totalFreebieCount) {
+        confirmBtn.disabled = false;
+        confirmBtn.style.backgroundColor = '#00B900';
+    } else {
+        confirmBtn.disabled = true;
+        confirmBtn.style.backgroundColor = '#aaa';
+    }
 }
 
 
@@ -265,7 +335,7 @@ async function submitFinalOrder() {
     // 1. 計算商品小計
     pendingOrder.forEach(item => {
         subtotal += item.qty * item.price;
-        finalOrderDetails.push(`${item.name} x ${item.qty} (單價 $${item.price})`); 
+        finalOrderDetails.push(`${item.name} x ${item.qty} (單價 $${item.price})`);    
     });
 
     let discountAmount = 0;
@@ -274,7 +344,7 @@ async function submitFinalOrder() {
     if (chosenFreebieItems.length > 0) {
         
         let freebieTotalDiscount = 0;
-        let freebieSummary = {}; 
+        let freebieSummary = {};    
         
         chosenFreebieItems.forEach(id => {
             const freebie = menu[id];
@@ -333,4 +403,5 @@ async function submitFinalOrder() {
         submitButton.disabled = false;
         submitButton.innerText = "確認送出訂單";
     }
+
 }
