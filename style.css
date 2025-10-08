@@ -2,281 +2,326 @@
  * ===== 全域樣式與排版 =====
  */
 body {
-    font-family: 'Noto Sans TC', sans-serif;
-    margin: 0;
-    padding: 20px 20px 80px 20px; 
-    background-color: #f2d1d5; 
-    color: #333;
+  font-family: 'Noto Sans TC', sans-serif;
+  margin: 0;
+  padding: 20px 20px 80px 20px;
+  background-color: #f2d1d5;
+  color: #333;
 }
 
-/* Modal 開啟時防止背景滾動 */
+/* ✅ Modal 開啟時防止背景滾動 */
 body.modal-open {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 h1 {
-    text-align: center;
-    margin-bottom: 30px;
-    padding-bottom: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* ===== 菜單容器與兩欄網格佈局 ===== */
 #menu {
-    display: grid;
-    grid-template-columns: 1fr 1fr; 
-    gap: 15px; 
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
 }
 
 /* ===== 標題樣式 ===== */
 .menu-category-title {
-    grid-column: 1 / -1;
-    background-color: #f0f0f5; 
-    color: #6a6a6a;
-    margin: 20px -20px 10px -20px; 
-    font-size: 1.2em;
-    font-weight: bold;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px; 
+  grid-column: 1 / -1;
+  background-color: #f0f0f5;
+  color: #6a6a6a;
+  margin: 20px -20px 10px -20px;
+  font-size: 1.2em;
+  font-weight: bold;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
 }
 
 .discount-tag {
-    background-color: #00B900;
-    color: white;
-    font-size: 0.7em;
-    padding: 3px 8px;
-    border-radius: 4px;
+  background-color: #00B900;
+  color: white;
+  font-size: 0.7em;
+  padding: 3px 8px;
+  border-radius: 4px;
 }
 
 .new-tag {
-    background-color: #f3486e;
-    color: white;
-    font-size: 0.7em;
-    padding: 3px 6px;
-    border-radius: 4px;
-    margin-left: 5px;
+  background-color: #f3486e;
+  color: white;
+  font-size: 0.7em;
+  padding: 3px 6px;
+  border-radius: 4px;
+  margin-left: 5px;
 }
 
 /* ===== 菜單項目 ===== */
 .menu-item {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: white;
-    padding: 10px; 
-    border-radius: 8px;
-    display: flex; 
-    flex-direction: column; 
-    align-items: center;
-    text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .item-image {
-    width: 160px; 
-    height: 120px; 
-    object-fit: cover;
-    border-radius: 4px;
-    margin-bottom: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  width: 160px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 
 .item-info {
-    display: flex; 
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 5px;
 }
 
 .item-name {
-    margin: 0;
-    font-size: 1.1em; 
-    font-weight: bold;
-    color: #555;
+  margin: 0;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #555;
 }
 
 .item-tag {
-    font-size: 0.75em;
-    font-weight: bold;
-    padding: 2px 6px;
-    border-radius: 3px;
-    margin: 4px 0;
+  font-size: 0.75em;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin: 4px 0;
 }
 
-.item-tag.vegetarian { background-color: #4CAF50; color: white; }
-.item-tag.meat { background-color: #F44336; color: white; }
+.item-tag.vegetarian {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.item-tag.meat {
+  background-color: #F44336;
+  color: white;
+}
 
 .item-price {
-    margin: 0; 
-    font-size: 0.9em;
-    color: #888;
+  margin: 0;
+  font-size: 0.9em;
+  color: #888;
 }
 
 /* ===== 數量控制 ===== */
 .quantity-control {
-    display: flex;
-    align-items: center;
-    border: 1px solid #e7b1b7;
-    border-radius: 4px;
-    overflow: hidden;
-    width: 100%;
-    max-width: 120px;
-    margin-top: auto;
+  display: flex;
+  align-items: center;
+  border: 1px solid #e7b1b7;
+  border-radius: 4px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 120px;
+  margin-top: auto;
 }
 
 .quantity-control input[type="number"] {
-    width: 40px;
-    padding: 8px 0;
-    border: none;
-    text-align: center;
-    font-size: 1em;
-    background-color: #fffaf5;
-    -webkit-appearance: none;
-    -moz-appearance: textfield;
-    flex-grow: 1; 
+  width: 40px;
+  padding: 8px 0;
+  border: none;
+  text-align: center;
+  font-size: 1em;
+  background-color: #fffaf5;
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  flex-grow: 1;
 }
 
 .qty-btn {
-    width: 36px;
-    height: 36px;
-    background-color: #f3486e;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 1.2em;
-    font-weight: bold;
-    transition: background-color 0.1s;
+  width: 36px;
+  height: 36px;
+  background-color: #f3486e;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2em;
+  font-weight: bold;
+  transition: background-color 0.1s;
 }
 
 .qty-btn:hover {
-    background-color: #e7b1b7;
-    color: #333;
+  background-color: #e7b1b7;
+  color: #333;
 }
 
-.minus-btn { border-right: 1px solid rgba(255,255,255,0.3); }
-.plus-btn { border-left: 1px solid rgba(255,255,255,0.3); }
+.minus-btn {
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.plus-btn {
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+}
 
 /* ===== 固定底部送出按鈕 ===== */
 #submit-button {
-    position: fixed; 
-    bottom: env(safe-area-inset-bottom, 0); 
-    left: 0; right: 0;
-    width: 100%;
-    padding: 15px 20px;
-    border-radius: 0;
-    background-color: #f3486e;
-    color: white;
-    border: none;
-    font-size: 1.2em;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    z-index: 999;
+  position: fixed;
+  bottom: env(safe-area-inset-bottom, 0);
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding: 15px 20px;
+  border-radius: 0;
+  background-color: #f3486e;
+  color: white;
+  border: none;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  z-index: 999;
 }
+
 #submit-button:hover:not(:disabled) {
-    background-color: #e7b1b7;
-    color: #333;
+  background-color: #e7b1b7;
+  color: #333;
 }
+
 #submit-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
 /* ===== 贈品選擇 Modal ===== */
 .modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.6);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    opacity: 0;
-    transition: opacity 0.3s ease; /* ✅ 漸入效果 */
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease; /* ✅ 漸入效果 */
 }
 
-/* 顯示時的動畫狀態 */
+/* 顯示時淡入動畫 */
 .modal-overlay.show {
-    display: flex;
-    opacity: 1;
+  display: flex;
+  opacity: 1;
 }
 
+/* Modal 主體 */
 .modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 85%;
-    max-width: 400px;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 85%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: popIn 0.25s ease; /* ✅ 彈入動畫 */
+}
+
+/* 彈入效果 */
+@keyframes popIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 /* 贈品按鈕排列 */
 .freebie-options {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap; 
-    gap: 10px; 
-    margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
 }
 
 .freebie-options button {
-    background-color: #00B900;
-    color: white;
-    border: 3px solid transparent; /* ✅ 固定邊框寬度，避免跳動 */
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 15px;
-    transition: background-color 0.3s;
-}
-
-/* ✅ 選中樣式 */
-.freebie-choice-btn.selected {
-    border-color: #ff5722 !important;
-    background-color: #fce2e2 !important;
-    color: #333 !important;
-    font-weight: bold;
-    filter: brightness(0.95);
+  background-color: #00B900;
+  color: white;
+  border: 3px solid transparent; /* 固定邊框寬度，避免跳動 */
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background-color 0.3s, transform 0.1s;
 }
 
 .freebie-options button:hover {
-    background-color: #00a300;
+  background-color: #00a300;
 }
+
 .freebie-options button:active {
-    transform: scale(0.97);
+  transform: scale(0.97);
+}
+
+/* ✅ 選中贈品樣式 */
+.freebie-choice-btn.selected {
+  border-color: #ff5722 !important;
+  background-color: #fce2e2 !important;
+  color: #333 !important;
+  font-weight: bold;
+  filter: brightness(0.95);
 }
 
 /* ✅ Modal底部按鈕群對齊 */
 .modal-content > div {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 15px;
-}
-#reset-freebie-btn,
-#confirm-freebie-btn {
-    flex: 1 1 45%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
 }
 
-/* 贈品確認按鈕 */
+#reset-freebie-btn,
 #confirm-freebie-btn {
-    background-color: #00B900;
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 8px;
-    font-size: 1.1em;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  flex: 1 1 45%;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
+
+/* 取消按鈕 */
+#reset-freebie-btn {
+  background-color: #aaa;
+  color: white;
+  border: none;
+}
+
+#reset-freebie-btn:hover {
+  background-color: #999;
+}
+
+/* 確認送出按鈕 */
+#confirm-freebie-btn {
+  background-color: #00B900;
+  color: white;
+  border: none;
+  font-size: 1.1em;
+}
+
 #confirm-freebie-btn:disabled {
-    background-color: #aaa !important;
-    cursor: not-allowed;
+  background-color: #aaa !important;
+  cursor: not-allowed;
 }
