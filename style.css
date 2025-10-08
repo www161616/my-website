@@ -10,11 +10,18 @@ body {
 }
 
 h1 {
-    color: #f3486e; /* 主色：標題顏色 */
+    /* 這些樣式被註釋掉，因為圖片已經取代文字和底線 */
+    /* color: #f3486e; */
+    /* border-bottom: 2px solid #f3486e; */
+    
     text-align: center;
     margin-bottom: 30px;
-    border-bottom: 2px solid #f3486e; /* 主色：標題底線 */
     padding-bottom: 10px;
+
+    /* 讓圖片在 h1 區塊內置中 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* ===== 菜單容器與兩欄網格佈局 ===== */
@@ -303,3 +310,4 @@ h1 {
     background-color: #aaa !important;
     cursor: not-allowed;
 }
+
