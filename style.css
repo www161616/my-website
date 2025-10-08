@@ -213,7 +213,7 @@ h1 {
   align-items: center;
   z-index: 1000;
   opacity: 0;
-  transition: opacity 0.3s ease; /* ✅ 漸入效果 */
+  transition: opacity 0.3s ease;
 }
 
 /* 顯示時淡入動畫 */
@@ -231,7 +231,7 @@ h1 {
   max-width: 400px;
   text-align: center;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  animation: popIn 0.25s ease; /* ✅ 彈入動畫 */
+  animation: popIn 0.25s ease;
 }
 
 /* 彈入效果 */
@@ -258,7 +258,7 @@ h1 {
 .freebie-options button {
   background-color: #00B900;
   color: white;
-  border: 3px solid transparent; /* 固定邊框寬度，避免跳動 */
+  border: 3px solid transparent;
   padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;
@@ -289,28 +289,31 @@ h1 {
   justify-content: space-around;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
+/* ✅ 兩個底部按鈕統一設計 */
 #reset-freebie-btn,
 #confirm-freebie-btn {
   flex: 1 1 45%;
-  padding: 12px;
-  border-radius: 8px;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 1.05em;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s;
+  border: none;
+  transition: background-color 0.3s, transform 0.1s;
 }
 
 /* 取消按鈕 */
 #reset-freebie-btn {
-  background-color: #aaa;
-  color: white;
-  border: none;
+  background-color: #ddd;
+  color: #333;
+  border: 2px solid #bbb;
 }
 
 #reset-freebie-btn:hover {
-  background-color: #999;
+  background-color: #ccc;
 }
 
 /* 確認送出按鈕 */
@@ -318,10 +321,14 @@ h1 {
   background-color: #00B900;
   color: white;
   border: none;
-  font-size: 1.1em;
+}
+
+#confirm-freebie-btn:hover {
+  background-color: #009900;
 }
 
 #confirm-freebie-btn:disabled {
   background-color: #aaa !important;
   cursor: not-allowed;
+  transform: none;
 }
