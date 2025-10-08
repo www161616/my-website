@@ -211,16 +211,13 @@ function showFreebieModal(totalFreebieCount) {
             const chosenItemId = button.dataset.itemId;
             const categoryId = button.dataset.categoryId;
             
-            // 判斷按鈕是否已被選取 (用於判斷是否執行取消操作)
-            const isCurrentlySelected = button.classList.contains('selected'); 
-            const maxCount = freebieGroups[categoryId];
-
             // 檢查該品項目前在 chosenFreebieItems 中被選了幾次
             const currentTally = chosenFreebieItems.filter(id => id === chosenItemId).length;
+            const maxCount = freebieGroups[categoryId];
 
 
             if (currentTally > 0) { 
-                // ===== 取消選擇邏輯 (只要已選過一次，就可以取消) =====
+                // ===== 取消選擇邏輯 (已選過一次，就可以取消) =====
                 
                 // 1. 從已選陣列中移除第一個匹配的項目 (只移除一個)
                 const index = chosenFreebieItems.indexOf(chosenItemId);
@@ -255,11 +252,11 @@ function showFreebieModal(totalFreebieCount) {
                         
                     } else {
                         alert(`您在【${eligibleCategories.find(c => c.id === categoryId).name}】類別的贈品數量已選完囉！`);
-                        return;
+                        return; // 數量已滿，不執行後續更新
                     }
                 } else {
                      alert(`您已選滿所有 ${totalFreebieCount} 顆免費贈品！`);
-                     return; 
+                     return; // 總數量已滿
                 }
             }
             
