@@ -1,13 +1,13 @@
-document.addEventListener("touchstart", function (e) {
+// ✅ 防止雙指縮放／雙擊放大
+document.addEventListener("touchstart", e => {
   if (e.touches.length > 1) e.preventDefault();
 }, { passive: false });
 
-// ===== 您的個人化資訊 =====
+// ✅ 個人化設定
 const myLiffId = "2008228791-ZBdVQo59";
 const GAS_URL = "https://script.google.com/macros/s/AKfycby3HBNxfg8DvjatRaj9-1ADxQnXPplK60fFdKpstqgE9wuWbal9SXGIDcOGL-eKpLn_tg/exec";
-// ===================================
 
-// ===== 商品清單 =====
+// ✅ 商品清單
 const menu = {
   // === 老麵饅頭 ===
   "shandong-mantou": { name: "山東饅頭", price: 21, category: "Mantou" },
@@ -44,8 +44,10 @@ let customerName = "";
 let pendingOrder = [];
 let chosenFreebieItems = [];
 
+// ===========================================
 document.addEventListener("DOMContentLoaded", () => initializeLiff(myLiffId));
 
+// ===== 初始化 LIFF =====
 async function initializeLiff(liffId) {
   try {
     await liff.init({ liffId });
@@ -53,28 +55,45 @@ async function initializeLiff(liffId) {
       const profile = await liff.getProfile();
       customerName = profile.displayName;
     }
+
     document.getElementById("submit-button").addEventListener("click", checkOrderEligibility);
-    document.querySelectorAll(".qty-btn").forEach(btn => btn.addEventListener("click", handleQuantityChange));
+    document.querySelectorAll(".qty-btn").forEach(btn => {
+      btn.addEventListener("click", handleQuantityChange);
+
+      // ✅ 新增：長按連續加減功能
+      let interval;
+      btn.addEventListener("touchstart", () => {
+        interval = setInterval(() => btn.click(), 120);
+      });
+      btn.addEventListener("touchend", () => clearInterval(interval));
+      btn.addEventListener("touchcancel", () => clearInterval(interval));
+    });
   } catch (err) {
     console.error("LIFF 初始化失敗", err);
   }
 }
 
+// ===== 數量加減 =====
 function handleQuantityChange(e) {
   const btn = e.currentTarget;
   const id = btn.dataset.id;
   const input = document.getElementById(id);
   if (!input) return;
+
   let val = parseInt(input.value) || 0;
+  btn.classList.add("btn-tap");
+  setTimeout(() => btn.classList.remove("btn-tap"), 150);
+
   if (btn.classList.contains("plus-btn")) val++;
   else if (btn.classList.contains("minus-btn")) val = Math.max(0, val - 1);
+
   input.value = val;
 }
 
-// ✅ 改版：以總數判斷優惠
+// ===== 判斷優惠 =====
 function checkOrderEligibility() {
   pendingOrder = [];
-  let eligibleTotal = 0; // 符合的商品總數
+  let eligibleTotal = 0;
 
   for (const id in menu) {
     const el = document.getElementById(id);
@@ -96,7 +115,14 @@ function checkOrderEligibility() {
   const totalFreebieCount = Math.floor(eligibleTotal / 5);
   chosenFreebieItems = [];
 
-  totalFreebieCount > 0 ? showFreebieModal(totalFreebieCount) : submitFinalOrder();
+  if (totalFreebieCount > 0) {
+    showFreebieModal(totalFreebieCount);
+  } else {
+    if (eligibleTotal > 0 && eligibleTotal < 5) {
+      alert(`目前已選 ${eligibleTotal} 顆，再買 ${5 - eligibleTotal} 顆即可多送 1 顆 🎁`);
+    }
+    submitFinalOrder();
+  }
 }
 
 // ===== 贈品彈窗 =====
@@ -104,20 +130,19 @@ function showFreebieModal(totalFreebieCount) {
   const modal = document.getElementById("freebie-modal");
   const modalContent = modal.querySelector(".modal-content");
 
-  // 贈品只包含這三類商品，且不包含 noFreebie:true
   const freebieList = Object.entries(menu)
     .filter(([_, item]) => ["Mantou", "Baozi", "Roll"].includes(item.category) && !item.noFreebie)
     .map(([id, item]) => `<button class="freebie-choice-btn" data-item-id="${id}">${item.name}</button>`)
     .join("");
 
   modalContent.innerHTML = `
-    <h3>恭喜您符合買5送1優惠！</h3>
-    <p>您共可選擇 <strong id="freebie-remaining">${totalFreebieCount}</strong> 顆免費商品。</p>
+    <h3>🎉 恭喜您符合買5送1優惠！</h3>
+    <p>您可選擇 <strong id="freebie-remaining">${totalFreebieCount}</strong> 顆免費商品。</p>
     <div class="freebie-options">${freebieList}</div>
     <p style="font-weight:bold;">已選擇：<span id="chosen-freebies-summary">無</span></p>
     <div style="display:flex;justify-content:space-around;margin-top:15px;">
-      <button id="reset-freebie-btn" style="background:#aaa;color:white;padding:10px 15px;border:none;border-radius:8px;font-weight:bold;">取消所有贈品</button>
-      <button id="confirm-freebie-btn" disabled style="background:#aaa;color:white;padding:10px 15px;border:none;border-radius:8px;font-weight:bold;">確認送出訂單</button>
+      <button id="reset-freebie-btn" style="background:#bbb;color:white;padding:12px 18px;border:none;border-radius:8px;font-weight:bold;font-size:1.1em;">取消所有贈品</button>
+      <button id="confirm-freebie-btn" disabled style="background:#aaa;color:white;padding:12px 18px;border:none;border-radius:8px;font-weight:bold;font-size:1.1em;">確認送出訂單</button>
     </div>
   `;
 
@@ -134,14 +159,17 @@ function showFreebieModal(totalFreebieCount) {
   modal.querySelectorAll(".freebie-choice-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       const itemId = btn.dataset.itemId;
+
       if (currentTotal < totalFreebieCount) {
         chosenFreebieItems.push(itemId);
         currentTotal++;
         btn.classList.add("selected");
         btn.textContent = `${menu[itemId].name} (${chosenFreebieItems.filter(i => i === itemId).length})`;
       } else {
-        alert("您已選滿所有贈品！");
+        btn.classList.add("shake");
+        setTimeout(() => btn.classList.remove("shake"), 400);
       }
+
       updateFreebieModalUI(totalFreebieCount, currentTotal, chosenFreebieItems, remaining, summary, confirm);
     });
   });
@@ -166,7 +194,10 @@ function closeFreebieModal() {
   const modal = document.getElementById("freebie-modal");
   modal.classList.remove("show");
   document.body.classList.remove("modal-open");
-  setTimeout(() => (modal.style.display = "none"), 300);
+  setTimeout(() => {
+    modal.style.display = "none";
+    modal.querySelector(".modal-content").innerHTML = "";
+  }, 300);
 }
 
 function updateFreebieModalUI(total, current, chosen, remaining, summary, confirm) {
@@ -220,15 +251,16 @@ async function submitFinalOrder() {
 
     if (liff.isInClient()) {
       await liff.sendMessages([{ type: "text", text: `【新訂單 - ${customerName}】\n${orderSummary}` }]);
-      alert("訂單已成功送出並記錄！");
+      alert("✅ 訂單已成功送出並記錄！");
       liff.closeWindow();
-    } else alert(`訂單已成功送出並記錄！\n\n${orderSummary}`);
+    } else {
+      alert(`✅ 訂單已成功送出並記錄！\n\n${orderSummary}`);
+    }
   } catch (err) {
     console.error("傳送訂單失敗:", err);
-    alert("傳送訂單失敗，請稍後再試。");
+    alert("⚠️ 傳送訂單失敗，請稍後再試。");
   } finally {
     submitButton.disabled = false;
     submitButton.innerText = "確認送出訂單";
   }
 }
-
