@@ -302,17 +302,26 @@ h1 {
 
 /* 新增：被選中的贈品按鈕樣式 */
 .freebie-choice-btn.selected {
+    /* 修正：避免點擊重複選擇時，樣式被鎖定影響視覺回饋 */
     border: 3px solid #ff5722 !important; /* 顯眼的橘紅色邊框 */
     background-color: #fce2e2 !important; /* 非常淺的粉色背景 */
     color: #333 !important; /* 文字變深 */
     font-weight: bold;
     padding: 5px 9px; /* 調整內邊距以適應邊框 */
+    /* 新增：當按鈕被選中時，點擊時的樣式回饋 */
+    filter: brightness(0.95); /* 輕微變暗，模擬按下效果 */
 }
-
 
 .freebie-options button:hover {
     background-color: #00a300;
 }
+
+/* 確保點擊 active 效果不會覆蓋選中樣式 */
+.freebie-options button:active {
+    filter: brightness(0.9);
+    transform: scale(0.99); /* 輕微縮小，模擬點擊手感 */
+}
+
 
 #confirm-freebie-btn {
     width: 100%;
