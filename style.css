@@ -332,3 +332,20 @@ h1 {
   cursor: not-allowed;
   transform: none;
 }
+
+/* ===== 防止連點 + / - 按鈕導致畫面抖動 ===== */
+button, 
+input, 
+select, 
+textarea {
+  touch-action: manipulation; /* ✅ 阻止雙擊縮放 */
+  -webkit-tap-highlight-color: transparent; /* ✅ 移除點擊灰框 */
+}
+
+/* 特別針對 quantity 按鈕再強化 */
+.qty-btn {
+  -webkit-user-select: none; /* ✅ 禁止選取文字 */
+  user-select: none;
+  touch-action: manipulation;
+  transform: translateZ(0); /* ✅ 避免點擊時畫面重繪 */
+}
