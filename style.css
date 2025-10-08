@@ -10,10 +10,10 @@ body {
 }
 
 h1 {
-    color: #a04000; /* 咖啡色標題 */
+    color: #f3486e; /* 咖啡色標題 */
     text-align: center;
     margin-bottom: 30px;
-    border-bottom: 2px solid #a04000;
+    border-bottom: 2px solid #f3486e;
     padding-bottom: 10px;
 }
 
@@ -55,7 +55,7 @@ h1 {
 }
 
 .new-tag {
-    background-color: #ff5722;
+    background-color: #f3486e;
     color: white;
     font-size: 0.7em;
     padding: 3px 6px;
@@ -83,8 +83,8 @@ h1 {
 
 /* 【方形圖片】圖片容器，讓圖片填滿欄位寬度 */
 .item-image {
-    width: 100%; 
-    height: auto; 
+    width: 160px; 
+    height: 120px; 
     min-height: 100px; /* 確保圖片有最小高度 */
     max-height: 120px; /* 確保圖片不至於太高 */
     object-fit: cover;
@@ -149,7 +149,7 @@ h1 {
 .quantity-control {
     display: flex;
     align-items: center;
-    border: 1px solid #a04000; 
+    border: 1px solid #f3486e; 
     border-radius: 4px;
     overflow: hidden;
     margin-left: 0;
@@ -178,7 +178,7 @@ h1 {
 .qty-btn {
     width: 36px;
     height: 36px;
-    background-color: #a04000; 
+    background-color: #f3486e; 
     color: white;
     border: none;
     cursor: pointer;
@@ -190,11 +190,11 @@ h1 {
 }
 
 .qty-btn:hover {
-    background-color: #7a3000;
+    background-color: #f3486e;
 }
 
 .qty-btn:active {
-    background-color: #552000;
+    background-color: #f3486e;
 }
 
 .minus-btn {
@@ -211,7 +211,7 @@ h1 {
 #submit-button {
     width: 100%;
     padding: 15px;
-    background-color: #a04000;
+    background-color: #f3486e.;
     color: white;
     border: none;
     border-radius: 8px;
@@ -224,7 +224,7 @@ h1 {
 }
 
 #submit-button:hover:not(:disabled) {
-    background-color: #7a3000;
+    background-color: #f3486e;
 }
 
 #submit-button:disabled {
