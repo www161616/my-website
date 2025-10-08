@@ -6,7 +6,7 @@ body {
     margin: 0;
     /* 重點修改 1: 增加底部間距，防止送出按鈕遮擋內容 */
     padding: 20px 20px 80px 20px; 
-    background-color: #f2d1d5; /* <--- 已替換為您指定的淡粉紅色 */
+    background-color: #f2d1d5; /* 淡粉紅色 */
     color: #333;
 }
 
