@@ -23,7 +23,7 @@ const menu = {
     "milk-cheese-roll": { name: "牛奶起司捲", price: 32, category: "Roll" },
     "brown-sugar-cheese-roll": { name: "紅糖起司捲", price: 32, category: "Roll" },
     "sausage-roll": { name: "德國香腸起司", price: 32, category: "Roll" },
-    "assorted-mini": { name: "綜合起司小饅頭 (9入)", price: 95, category: "Roll" },
+    "assorted-mini": { name: "綜合起司小饅頭 (9入)", price: 95, category: "Roll, noFreebie: true" },
     "colorful-mini": { name: "彩色小饅頭 (400克)", price: 145, category: "None" },
     "milk-mini": { name: "牛奶小饅頭 (400克)", price: 165, category: "None" },
 };
@@ -106,7 +106,7 @@ function showFreebieModal(totalFreebieCount) {
 
     const generateCategoryOptions = catId =>
         Object.entries(menu)
-            .filter(([_, item]) => item.category === catId)
+            .filter(([_, item]) => item.category === catId && !item.noFreebie)
             .map(([id, item]) => `<button class="freebie-choice-btn" data-item-id="${id}" data-category-id="${catId}">${item.name}</button>`)
             .join("");
 
@@ -262,3 +262,4 @@ async function submitFinalOrder() {
         submitButton.innerText = "確認送出訂單";
     }
 }
+
