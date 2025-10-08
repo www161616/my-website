@@ -5,8 +5,10 @@ body {
   font-family: 'Noto Sans TC', sans-serif;
   margin: 0;
   padding: 20px 20px 80px 20px;
-  background-color: #f2d1d5;
+  background-color: #f8f3f5; /* 柔粉白底 */
   color: #333;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 /* ✅ Modal 開啟時防止背景滾動 */
@@ -18,97 +20,133 @@ body.modal-open {
 h1 {
   text-align: center;
   margin-bottom: 30px;
-  padding-bottom: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #e54e79;
 }
 
 /* ===== 菜單容器 (兩欄排列) ===== */
 #menu {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 15px;
+  gap: 18px;
 }
 
 /* ===== 分類標題 ===== */
 .menu-category-title {
   grid-column: 1 / -1;
-  background-color: #f0f0f5;
-  color: #6a6a6a;
-  margin: 20px -20px 10px -20px;
-  font-size: 1.2em;
-  font-weight: bold;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+  color: #555;
+  margin: 25px -20px 10px -20px;
+  font-size: 1.1em;
+  font-weight: 700;
+  border-top: 2px solid #f3d6dc;
+  border-bottom: 2px solid #f3d6dc;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(8px);
+  z-index: 10;
 }
 
 .discount-tag {
   background-color: #00B900;
   color: white;
-  font-size: 0.7em;
-  padding: 3px 8px;
-  border-radius: 4px;
+  font-size: 0.75em;
+  padding: 4px 8px;
+  border-radius: 6px;
 }
 
 .new-tag {
   background-color: #f3486e;
   color: white;
-  font-size: 0.7em;
-  padding: 3px 6px;
-  border-radius: 4px;
-  margin-left: 5px;
+  font-size: 0.75em;
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-left: 6px;
 }
 
-/* ===== 菜單項目 ===== */
+/* ===== 菜單項目 (LINE禮物館風格) ===== */
 .menu-item {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: white;
-  padding: 10px;
-  border-radius: 10px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 3px 8px rgba(240, 140, 160, 0.2);
+  padding: 12px 10px 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  transition: all 0.2s ease-in-out;
+  position: relative;
 }
 
+.menu-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(240, 140, 160, 0.25);
+}
+
+/* 商品圖片 */
 .item-image {
-  width: 160px;
-  height: 120px;
+  width: 150px;
+  height: 115px;
   object-fit: cover;
-  border-radius: 6px;
-  margin-bottom: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  margin-bottom: 6px;
+  transition: transform 0.2s;
+}
+.menu-item:hover .item-image {
+  transform: scale(1.03);
 }
 
+/* 商品名稱 */
 .item-name {
-  font-size: 1.1em;
-  font-weight: bold;
-  color: #555;
-  margin-bottom: 5px;
+  font-size: 1em;
+  font-weight: 600;
+  color: #444;
+  margin: 4px 0 3px 0;
 }
 
+/* 素別標籤 */
+.item-tag {
+  font-size: 0.85em;
+  color: #777;
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* 不列入活動標籤 */
+.item-note {
+  font-size: 0.8em;
+  color: #c55;
+  margin-top: -2px;
+  margin-bottom: 2px;
+  line-height: 1.1;
+  font-weight: 500;
+}
+
+/* 價格 */
 .item-price {
   font-size: 0.9em;
-  color: #888;
-  margin-bottom: 8px;
+  color: #666;
+  margin: 3px 0 6px 0;
+  font-weight: 500;
 }
 
-/* ===== 數量控制 ===== */
+/* ===== 數量控制區 (粉嫩圓角風) ===== */
 .quantity-control {
   display: flex;
   align-items: center;
-  border: 1px solid #e7b1b7;
-  border-radius: 6px;
+  border: 1.5px solid #f6b6c2;
+  border-radius: 50px;
   overflow: hidden;
   width: 100%;
-  max-width: 120px;
-  margin-top: auto;
-  height: 40px; /* ✅ 鎖定高度避免抖動 */
+  max-width: 115px;
+  margin-top: 6px;
+  height: 36px;
+  background-color: #fff;
 }
 
 .quantity-control input[type="number"] {
@@ -116,68 +154,69 @@ h1 {
   border: none;
   text-align: center;
   font-size: 1em;
-  background-color: #fffaf5;
-  pointer-events: none; /* ✅ 防止點擊觸發鍵盤 */
+  background-color: #fffaf7;
+  pointer-events: none;
   user-select: none;
+  color: #333;
+  font-weight: 600;
 }
 
 .qty-btn {
   width: 38px;
-  height: 38px;
-  background-color: #f3486e;
-  color: white;
+  height: 36px;
+  background-color: #fbb6bf;
+  color: #fff;
   border: none;
   cursor: pointer;
-  font-size: 1.3em;
+  font-size: 1.2em;
   font-weight: bold;
   transition: transform 0.1s ease, background-color 0.15s;
-  -webkit-user-select: none;
   user-select: none;
   touch-action: manipulation;
   border-radius: 0;
 }
 
-/* ✅ 點擊按鈕的縮放動畫 */
 .qty-btn.btn-tap {
-  transform: scale(0.92);
+  transform: scale(0.9);
 }
 
-/* hover 效果 */
 .qty-btn:hover {
-  background-color: #e7b1b7;
-  color: #333;
+  background-color: #f58c9b;
 }
 
-/* 視覺細節 */
-.minus-btn { border-right: 1px solid rgba(255,255,255,0.3); }
-.plus-btn { border-left: 1px solid rgba(255,255,255,0.3); }
+.minus-btn {
+  border-right: 1px solid rgba(255,255,255,0.5);
+}
+.plus-btn {
+  border-left: 1px solid rgba(255,255,255,0.5);
+}
 
-/* ===== 底部送出按鈕 ===== */
+/* ===== 底部送出按鈕 (LINE禮物風) ===== */
 #submit-button {
   position: fixed;
   bottom: env(safe-area-inset-bottom, 0);
   left: 0;
   right: 0;
   width: 100%;
-  padding: 15px 20px;
-  border-radius: 0;
-  background-color: #f3486e;
+  padding: 16px 20px;
+  background: linear-gradient(90deg, #f77995, #fcb1c5);
   color: white;
   border: none;
   font-size: 1.2em;
-  font-weight: bold;
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.3s;
+  box-shadow: 0 -3px 10px rgba(200, 80, 120, 0.25);
+  transition: background 0.3s, transform 0.1s;
   z-index: 999;
 }
 
 #submit-button:hover:not(:disabled) {
-  background-color: #e7b1b7;
-  color: #333;
+  background: linear-gradient(90deg, #f68aa8, #f8b9c9);
+  transform: translateY(-2px);
 }
 
 #submit-button:disabled {
-  background-color: #ccc;
+  background: #ddd;
   cursor: not-allowed;
 }
 
@@ -187,14 +226,13 @@ h1 {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.55);
   justify-content: center;
   align-items: center;
   z-index: 1000;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
-
 .modal-overlay.show {
   display: flex;
   opacity: 1;
@@ -203,16 +241,14 @@ h1 {
 /* Modal 主體 */
 .modal-content {
   background-color: white;
-  padding: 22px;
-  border-radius: 10px;
+  padding: 25px;
+  border-radius: 18px;
   width: 85%;
   max-width: 420px;
   text-align: center;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.2);
   animation: popIn 0.25s ease;
 }
-
-/* 彈入動畫 */
 @keyframes popIn {
   from { transform: scale(0.9); opacity: 0.7; }
   to { transform: scale(1); opacity: 1; }
@@ -232,21 +268,19 @@ h1 {
   color: white;
   border: 3px solid transparent;
   padding: 8px 12px;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 15px;
   transition: background-color 0.3s, transform 0.1s;
 }
 
-/* ✅ 選中贈品 */
 .freebie-choice-btn.selected {
-  border-color: #ff5722 !important;
-  background-color: #fce2e2 !important;
-  color: #333 !important;
+  border-color: #ff6584 !important;
+  background-color: #ffe3ea !important;
+  color: #d13a59 !important;
   font-weight: bold;
 }
 
-/* shake 動畫 */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   25% { transform: translateX(-4px); }
@@ -269,7 +303,7 @@ h1 {
 #confirm-freebie-btn {
   flex: 1 1 45%;
   padding: 14px;
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 1.05em;
   font-weight: bold;
   cursor: pointer;
@@ -302,8 +336,6 @@ body, button, input {
   -webkit-user-select: none;
   user-select: none;
 }
-
-/* ✅ 確保快速連點不抖動 */
 .quantity-control, .qty-btn {
   transform: translateZ(0);
   will-change: transform;
