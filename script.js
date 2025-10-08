@@ -216,8 +216,9 @@ function showFreebieModal(totalFreebieCount) {
             const maxCount = freebieGroups[categoryId];
 
 
-            if (currentTally > 0) { 
-                // ===== 取消選擇邏輯 (已選過一次，就可以取消) =====
+            if (currentTally > 0 && button.classList.contains('selected')) { 
+                // ===== 取消選擇邏輯 (只要已選過一次，就可以取消) =====
+                // 必須同時檢查 currentTally > 0 和 button.classList.contains('selected')，確保能執行取消動作
                 
                 // 1. 從已選陣列中移除第一個匹配的項目 (只移除一個)
                 const index = chosenFreebieItems.indexOf(chosenItemId);
