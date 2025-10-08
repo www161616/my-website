@@ -4,7 +4,7 @@
 body {
     font-family: 'Noto Sans TC', sans-serif;
     margin: 0;
-    /* 重點修改 1: 增加底部間距，防止送出按鈕遮擋內容 */
+    /* 重點修正：增加底部間距，防止送出按鈕遮擋內容 */
     padding: 20px 20px 80px 20px; 
     background-color: #f2d1d5; /* 淡粉紅色 */
     color: #333;
@@ -302,13 +302,12 @@ h1 {
 
 /* 新增：被選中的贈品按鈕樣式 */
 .freebie-choice-btn.selected {
-    /* 修正：避免點擊重複選擇時，樣式被鎖定影響視覺回饋 */
+    /* 修正：讓重複點選時有視覺回饋，不被鎖定 */
     border: 3px solid #ff5722 !important; /* 顯眼的橘紅色邊框 */
     background-color: #fce2e2 !important; /* 非常淺的粉色背景 */
     color: #333 !important; /* 文字變深 */
     font-weight: bold;
     padding: 5px 9px; /* 調整內邊距以適應邊框 */
-    /* 新增：當按鈕被選中時，點擊時的樣式回饋 */
     filter: brightness(0.95); /* 輕微變暗，模擬按下效果 */
 }
 
@@ -318,8 +317,8 @@ h1 {
 
 /* 確保點擊 active 效果不會覆蓋選中樣式 */
 .freebie-options button:active {
-    filter: brightness(0.9);
-    transform: scale(0.99); /* 輕微縮小，模擬點擊手感 */
+    filter: brightness(0.85); /* 讓點擊時更深，模擬點擊手感 */
+    transform: scale(0.99); 
 }
 
 
