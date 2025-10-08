@@ -1,3 +1,7 @@
+document.addEventListener("touchstart", function (e) {
+  if (e.touches.length > 1) e.preventDefault();
+}, { passive: false });
+
 // ===== 您的個人化資訊 =====
 const myLiffId = "2008228791-ZBdVQo59";
 const GAS_URL = "https://script.google.com/macros/s/AKfycby3HBNxfg8DvjatRaj9-1ADxQnXPplK60fFdKpstqgE9wuWbal9SXGIDcOGL-eKpLn_tg/exec";
@@ -227,3 +231,4 @@ async function submitFinalOrder() {
     submitButton.innerText = "確認送出訂單";
   }
 }
+
