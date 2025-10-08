@@ -211,45 +211,55 @@ function showFreebieModal(totalFreebieCount) {
             const chosenItemId = button.dataset.itemId;
             const categoryId = button.dataset.categoryId;
             
-            // 判斷按鈕是否已被選取
-            const isCurrentlySelected = button.classList.contains('selected');
+            // 判斷按鈕是否已被選取 (用於判斷是否執行取消操作)
+            const isCurrentlySelected = button.classList.contains('selected'); 
             const maxCount = freebieGroups[categoryId];
 
-            if (isCurrentlySelected) {
-                // ===== 取消選擇邏輯 =====
+            // 檢查該品項目前在 chosenFreebieItems 中被選了幾次
+            const currentTally = chosenFreebieItems.filter(id => id === chosenItemId).length;
+
+
+            if (currentTally > 0) { 
+                // ===== 取消選擇邏輯 (只要已選過一次，就可以取消) =====
                 
-                // 1. 從已選陣列中移除第一個匹配的項目
+                // 1. 從已選陣列中移除第一個匹配的項目 (只移除一個)
                 const index = chosenFreebieItems.indexOf(chosenItemId);
                 if (index > -1) {
                     chosenFreebieItems.splice(index, 1); // 移除一個項目
                 }
                 
-                // 2. 更新計數器和樣式
+                // 2. 更新計數器
                 categorySelectionCounts[categoryId]--;
                 currentFreebieSelection--;
-                button.classList.remove('selected');
+
+                // 3. 檢查移除後該品項是否還有數量，若為 0 則移除 selected 樣式
+                const newTally = chosenFreebieItems.filter(id => id === chosenItemId).length;
+                if (newTally === 0) {
+                    button.classList.remove('selected');
+                }
 
             } else {
-                // ===== 新增選擇邏輯 =====
+                // ===== 新增選擇邏輯 (允許重複點選) =====
                 
-                // 檢查是否還有免費數量
+                // 檢查是否還有總免費數量
                 if (currentFreebieSelection < totalFreebieCount) { // 檢查總數量
-                    if (categorySelectionCounts[categoryId] < maxCount) { // 檢查類別數量
-                        // 1. 紀錄選擇
+                    // 檢查類別數量 (保留這個類別限制，以免超選)
+                    if (categorySelectionCounts[categoryId] < maxCount) { 
+                        // 1. 紀錄選擇 (每次點擊都新增，允許重複)
                         chosenFreebieItems.push(chosenItemId);
                         categorySelectionCounts[categoryId]++;
                         currentFreebieSelection++;
                         
-                        // 2. 更新樣式
-                        button.classList.add('selected');
+                        // 2. 更新樣式 (只要被點擊過一次，就添加 selected 樣式)
+                        button.classList.add('selected'); 
                         
                     } else {
                         alert(`您在【${eligibleCategories.find(c => c.id === categoryId).name}】類別的贈品數量已選完囉！`);
-                        return; // 數量已滿，不執行後續更新
+                        return;
                     }
                 } else {
                      alert(`您已選滿所有 ${totalFreebieCount} 顆免費贈品！`);
-                     return; // 總數量已滿
+                     return; 
                 }
             }
             
