@@ -3,37 +3,29 @@ const myLiffId = "2008228791-ZBdVQo59";
 const GAS_URL = "https://script.google.com/macros/s/AKfycby3HBNxfg8DvjatRaj9-1ADxQnXPplK60fFdKpstqgE9wuWbal9SXGIDcOGL-eKpLn_tg/exec";
 // ===================================
 
-// category 決定了商品屬於哪個優惠組別：Mantou, Baozi, Roll, None
 const menu = {
-    // ===== 老麵饅頭 (category: Mantou) =====
-    "shandong-mantou": { name: "山東饅頭", price: 21, category: "Mantou", imageUrl: "https://via.placeholder.com/120x120?text=山東饅頭" },
-    "brown-sugar-mantou": { name: "紅糖饅頭", price: 21, category: "Mantou", imageUrl: "https://via.placeholder.com/120x120?text=紅糖饅頭" },
-    "sweet-potato-mantou": { name: "微甜饅頭", price: 21, category: "Mantou", imageUrl: "https://via.placeholder.com/120x120?text=微甜饅頭" },
-    "yam-mantou": { name: "芋頭饅頭", price: 21, category: "Mantou", imageUrl: "https://via.placeholder.com/120x120?text=芋頭饅頭" },
-    "whole-wheat-mantou": { name: "全麥饅頭", price: 21, category: "Mantou", imageUrl: "https://via.placeholder.com/120x120?text=全麥饅頭" },
-    "five-grain-mantou": { name: "五穀雜糧", price: 27, category: "Mantou", imageUrl: "https://via.placeholder.com/120x120?text=五穀雜糧" },
-
-    // ===== 老麵包子 (category: Baozi) =====
-    "peeled-pepper-bun": { name: "剝皮辣椒包", price: 32, category: "Baozi", imageUrl: "https://via.placeholder.com/120x120?text=剝皮辣椒包" },
-    "fresh-meat-bun": { name: "鮮肉包", price: 27, category: "Baozi", imageUrl: "https://via.placeholder.com/120x120?text=鮮肉包" },
-    "snow-vegetable-bun": { name: "雪裡紅素包", price: 27, category: "Baozi", imageUrl: "https://via.placeholder.com/120x120?text=雪裡紅素包" },
-    "bamboo-shoot-bun": { name: "香椿竹筍包", price: 27, category: "Baozi", imageUrl: "https://via.placeholder.com/120x120?text=香椿竹筍包" },
-    "mustard-green-bun": { name: "梅干菜肉包", price: 27, category: "Baozi", imageUrl: "https://via.placeholder.com/120x120?text=梅干菜肉包" },
-    "cabbage-bun": { name: "高麗菜包", price: 27, category: "Baozi", imageUrl: "https://via.placeholder.com/120x120?text=高麗菜包" },
-    "chive-bun": { name: "蔥花捲", price: 27, category: "Baozi", imageUrl: "https://via.placeholder.com/120x120?text=蔥花捲" },
-    "sesame-bun": { name: "芝麻包", price: 27, category: "Baozi", imageUrl: "https://via.placeholder.com/120x120?text=芝麻包" },
-    "red-bean-bun": { name: "紅豆包", price: 27, category: "Baozi", imageUrl: "https://via.placeholder.com/120x120?text=紅豆包" },
-    "taro-mash-bun": { name: "芋泥地瓜包", price: 27, category: "Baozi", imageUrl: "https://via.placeholder.com/120x120?text=芋泥地瓜包" },
-
-    // ===== 起司捲 (category: Roll) =====
-    "milk-cheese-roll": { name: "牛奶起司捲", price: 32, category: "Roll", imageUrl: "https://via.placeholder.com/120x120?text=牛奶起司捲" },
-    "brown-sugar-cheese-roll": { name: "紅糖起司捲", price: 32, category: "Roll", imageUrl: "https://via.placeholder.com/120x120?text=紅糖起司捲" },
-    "sausage-roll": { name: "德國香腸起司", price: 32, category: "Roll", imageUrl: "https://via.placeholder.com/120x120?text=德國香腸" },
-    "assorted-mini": { name: "綜合起司小饅頭 (9入)", price: 95, category: "Roll", imageUrl: "https://via.placeholder.com/120x120?text=綜合小饅頭" },
-
-    // ===== 小饅頭 (不參與優惠) =====
-    "colorful-mini": { name: "彩色小饅頭 (400克)", price: 145, category: "None", imageUrl: "https://via.placeholder.com/120x120?text=彩色小饅頭" },
-    "milk-mini": { name: "牛奶小饅頭 (400克)", price: 165, category: "None", imageUrl: "https://via.placeholder.com/120x120?text=牛奶小饅頭" },
+    "shandong-mantou": { name: "山東饅頭", price: 21, category: "Mantou" },
+    "brown-sugar-mantou": { name: "紅糖饅頭", price: 21, category: "Mantou" },
+    "sweet-potato-mantou": { name: "微甜饅頭", price: 21, category: "Mantou" },
+    "yam-mantou": { name: "芋頭饅頭", price: 21, category: "Mantou" },
+    "whole-wheat-mantou": { name: "全麥饅頭", price: 21, category: "Mantou" },
+    "five-grain-mantou": { name: "五穀雜糧", price: 27, category: "Mantou" },
+    "peeled-pepper-bun": { name: "剝皮辣椒包", price: 32, category: "Baozi" },
+    "fresh-meat-bun": { name: "鮮肉包", price: 27, category: "Baozi" },
+    "snow-vegetable-bun": { name: "雪裡紅素包", price: 27, category: "Baozi" },
+    "bamboo-shoot-bun": { name: "香椿竹筍包", price: 27, category: "Baozi" },
+    "mustard-green-bun": { name: "梅干菜肉包", price: 27, category: "Baozi" },
+    "cabbage-bun": { name: "高麗菜包", price: 27, category: "Baozi" },
+    "chive-bun": { name: "蔥花捲", price: 27, category: "Baozi" },
+    "sesame-bun": { name: "芝麻包", price: 27, category: "Baozi" },
+    "red-bean-bun": { name: "紅豆包", price: 27, category: "Baozi" },
+    "taro-mash-bun": { name: "芋泥地瓜包", price: 27, category: "Baozi" },
+    "milk-cheese-roll": { name: "牛奶起司捲", price: 32, category: "Roll" },
+    "brown-sugar-cheese-roll": { name: "紅糖起司捲", price: 32, category: "Roll" },
+    "sausage-roll": { name: "德國香腸起司", price: 32, category: "Roll" },
+    "assorted-mini": { name: "綜合起司小饅頭 (9入)", price: 95, category: "Roll" },
+    "colorful-mini": { name: "彩色小饅頭 (400克)", price: 145, category: "None" },
+    "milk-mini": { name: "牛奶小饅頭 (400克)", price: 165, category: "None" },
 };
 
 const eligibleCategories = [
@@ -47,9 +39,7 @@ let pendingOrder = [];
 let freebieGroups = {};
 let chosenFreebieItems = [];
 
-document.addEventListener("DOMContentLoaded", function () {
-    initializeLiff(myLiffId);
-});
+document.addEventListener("DOMContentLoaded", () => initializeLiff(myLiffId));
 
 async function initializeLiff(liffId) {
     try {
@@ -58,7 +48,6 @@ async function initializeLiff(liffId) {
             const profile = await liff.getProfile();
             customerName = profile.displayName;
         }
-
         document.getElementById("submit-button").addEventListener("click", checkOrderEligibility);
         document.querySelectorAll(".qty-btn").forEach(btn => btn.addEventListener("click", handleQuantityChange));
     } catch (err) {
@@ -71,7 +60,6 @@ function handleQuantityChange(e) {
     const id = btn.dataset.id;
     const input = document.getElementById(id);
     if (!input) return;
-
     let val = parseInt(input.value) || 0;
     if (btn.classList.contains("plus-btn")) val++;
     else if (btn.classList.contains("minus-btn")) val = Math.max(0, val - 1);
@@ -111,6 +99,7 @@ function checkOrderEligibility() {
     totalFreebieCount > 0 ? showFreebieModal(totalFreebieCount) : submitFinalOrder();
 }
 
+// ===== ✅ 改良版贈品彈窗控制 =====
 function showFreebieModal(totalFreebieCount) {
     const modal = document.getElementById("freebie-modal");
     const modalContent = modal.querySelector(".modal-content");
@@ -140,11 +129,15 @@ function showFreebieModal(totalFreebieCount) {
         <p>您共可選擇 <strong id="freebie-remaining">${totalFreebieCount}</strong> 顆免費包子。</p>
         ${sections}
         <p style="font-weight:bold;">總計已選擇贈品：<span id="chosen-freebies-summary">無</span></p>
-        <div style="display:flex;justify-content:space-around;margin-top:15px;">
-            <button id="reset-freebie-btn" style="background:#aaa;color:white;padding:10px 15px;border:none;border-radius:8px;font-weight:bold;">取消所有贈品</button>
-            <button id="confirm-freebie-btn" disabled style="background:#aaa;color:white;padding:10px 15px;border:none;border-radius:8px;font-weight:bold;">確認送出訂單</button>
+        <div>
+            <button id="reset-freebie-btn" style="background:#aaa;color:white;padding:10px;border:none;border-radius:8px;font-weight:bold;">取消所有贈品</button>
+            <button id="confirm-freebie-btn" disabled style="background:#aaa;color:white;padding:10px;border:none;border-radius:8px;font-weight:bold;">確認送出訂單</button>
         </div>
     `;
+
+    // ✅ 動畫顯示 + 鎖背景
+    document.body.classList.add("modal-open");
+    modal.classList.add("show");
 
     const remaining = document.getElementById("freebie-remaining");
     const summary = document.getElementById("chosen-freebies-summary");
@@ -161,12 +154,6 @@ function showFreebieModal(totalFreebieCount) {
             const catId = btn.dataset.categoryId;
             const maxCat = freebieGroups[catId];
 
-            if (currentTotal >= totalFreebieCount && categoryCount[catId] >= maxCat) {
-                alert("您已選滿所有贈品！");
-                return;
-            }
-
-            // ✅ 允許同一品項多次選擇
             if (categoryCount[catId] < maxCat && currentTotal < totalFreebieCount) {
                 chosenFreebieItems.push(itemId);
                 categoryCount[catId]++;
@@ -175,7 +162,7 @@ function showFreebieModal(totalFreebieCount) {
                 btn.classList.add("selected");
                 btn.textContent = `${menu[itemId].name} (${chosenFreebieItems.filter(i => i === itemId).length})`;
             } else {
-                alert(`【${menu[itemId].name}】已達上限`);
+                alert("此分類或總數已達上限！");
             }
 
             updateFreebieModalUI(totalFreebieCount, currentTotal, categoryCount, chosenFreebieItems, remaining, summary, confirm);
@@ -193,8 +180,17 @@ function showFreebieModal(totalFreebieCount) {
         updateFreebieModalUI(totalFreebieCount, currentTotal, categoryCount, chosenFreebieItems, remaining, summary, confirm);
     });
 
-    confirm.addEventListener("click", () => submitFinalOrder());
-    modal.style.display = "flex";
+    confirm.addEventListener("click", () => {
+        closeFreebieModal();
+        submitFinalOrder();
+    });
+}
+
+function closeFreebieModal() {
+    const modal = document.getElementById("freebie-modal");
+    modal.classList.remove("show");
+    document.body.classList.remove("modal-open");
+    setTimeout(() => (modal.style.display = "none"), 300); // 動畫結束後關閉
 }
 
 function updateFreebieModalUI(total, current, catCount, chosen, remaining, summary, confirm) {
@@ -206,20 +202,18 @@ function updateFreebieModalUI(total, current, catCount, chosen, remaining, summa
     });
 
     const tally = chosen.reduce((a, id) => ((a[menu[id].name] = (a[menu[id].name] || 0) + 1), a), {});
-    const text = Object.entries(tally)
-        .map(([n, c]) => `${n} x ${c}`)
-        .join("、");
+    const text = Object.entries(tally).map(([n, c]) => `${n} x ${c}`).join("、");
     summary.textContent = text || "無";
 
     confirm.disabled = current !== total;
     confirm.style.backgroundColor = confirm.disabled ? "#aaa" : "#00B900";
 }
 
+// ===== 傳送訂單到 GAS =====
 async function submitFinalOrder() {
     const submitButton = document.getElementById("submit-button");
     submitButton.disabled = true;
     submitButton.innerText = "訂單傳送中...";
-    document.getElementById("freebie-modal").style.display = "none";
 
     let subtotal = 0;
     let details = [];
@@ -248,7 +242,12 @@ async function submitFinalOrder() {
     const data = { customerName, orderSummary, totalPrice: final };
 
     try {
-        await fetch(GAS_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+        await fetch(GAS_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
 
         if (liff.isInClient()) {
             await liff.sendMessages([{ type: "text", text: `【新訂單 - ${customerName}】\n${orderSummary}` }]);
