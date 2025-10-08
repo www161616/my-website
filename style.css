@@ -4,7 +4,8 @@
 body {
     font-family: 'Noto Sans TC', sans-serif;
     margin: 0;
-    padding: 20px; /* 整體內邊距 */
+    /* 重點修改 1: 增加底部間距，防止送出按鈕遮擋內容 */
+    padding: 20px 20px 80px 20px; 
     background-color: #f2d1d5; /* <--- 已替換為您指定的淡粉紅色 */
     color: #333;
 }
@@ -214,21 +215,32 @@ h1 {
 }
 
 /*
- * ===== 送出按鈕樣式 (維持不變) =====
+ * ===== 送出按鈕樣式 (固定在底部) =====
  */
 #submit-button {
-    width: 100%;
-    padding: 15px;
+    /* 重點修改 2: 固定定位 */
+    position: fixed; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    width: 100%; /* 寬度佔滿視窗 */
+    
+    /* 調整 padding 和 border-radius 以適應固定底部 */
+    padding: 15px 20px; /* 左右增加內邊距 */
+    border-radius: 0; /* 移除底部圓角 */
+    
     background-color: #f3486e; /* 主色：送出按鈕背景 */
     color: white;
     border: none;
-    border-radius: 8px;
     font-size: 1.2em;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s;
-    grid-column: 1 / -1; 
-    margin-top: 20px;
+    z-index: 999; /* 確保按鈕在其他元素之上 */
+
+    /* 移除掉原有的網格/邊距相關樣式 */
+    /* grid-column: 1 / -1; */ 
+    /* margin-top: 20px; */ 
 }
 
 #submit-button:hover:not(:disabled) {
@@ -310,4 +322,3 @@ h1 {
     background-color: #aaa !important;
     cursor: not-allowed;
 }
-
