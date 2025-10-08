@@ -36,8 +36,8 @@ const menu = {
   "assorted-mini": { name: "綜合起司小饅頭 (9入)", price: 95, category: "Roll", noFreebie: true },
 
   // === 小饅頭 (不參與優惠) ===
-  "colorful-mini": { name: "彩色小饅頭 (400克)", price: 145, category: "None" },
-  "milk-mini": { name: "牛奶小饅頭 (400克)", price: 165, category: "None" },
+  "colorful-mini": { name: "彩色小饅頭 (400克)", price: 145, category: "None", noFreebie: true },
+  "milk-mini": { name: "牛奶小饅頭 (400克)", price: 165, category: "None", noFreebie: true },
 };
 
 let customerName = "";
@@ -60,7 +60,7 @@ async function initializeLiff(liffId) {
     document.querySelectorAll(".qty-btn").forEach(btn => {
       btn.addEventListener("click", handleQuantityChange);
 
-      // ✅ 新增：長按連續加減功能
+      // ✅ 長按連續加減
       let interval;
       btn.addEventListener("touchstart", () => {
         interval = setInterval(() => btn.click(), 120);
@@ -99,9 +99,17 @@ function checkOrderEligibility() {
     const el = document.getElementById(id);
     if (!el) continue;
     const qty = parseInt(el.value) || 0;
+
     if (qty > 0) {
       pendingOrder.push({ ...menu[id], qty });
-      if (["Mantou", "Baozi", "Roll"].includes(menu[id].category)) {
+
+      // ✅ 排除三項不參與買5送1的商品
+      if (
+        ["Mantou", "Baozi", "Roll"].includes(menu[id].category) &&
+        !menu[id].noFreebie &&
+        id !== "colorful-mini" &&
+        id !== "milk-mini"
+      ) {
         eligibleTotal += qty;
       }
     }
@@ -130,8 +138,14 @@ function showFreebieModal(totalFreebieCount) {
   const modal = document.getElementById("freebie-modal");
   const modalContent = modal.querySelector(".modal-content");
 
+  // ✅ 贈品不包含綜合起司小饅頭、彩色小饅頭、牛奶小饅頭
   const freebieList = Object.entries(menu)
-    .filter(([_, item]) => ["Mantou", "Baozi", "Roll"].includes(item.category) && !item.noFreebie)
+    .filter(([id, item]) =>
+      ["Mantou", "Baozi", "Roll"].includes(item.category) &&
+      !item.noFreebie &&
+      id !== "colorful-mini" &&
+      id !== "milk-mini"
+    )
     .map(([id, item]) => `<button class="freebie-choice-btn" data-item-id="${id}">${item.name}</button>`)
     .join("");
 
