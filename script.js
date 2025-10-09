@@ -231,27 +231,29 @@ async function submitFinalOrder() {
 
   let subtotal = 0;
   let details = [];
+
+  // 🧾 統計購買明細
   pendingOrder.forEach(i => {
     subtotal += i.qty * i.price;
     details.push(`${i.name} x ${i.qty} (單價 $${i.price})`);
   });
 
-  let discount = 0;
+  // 🎁 顯示贈品（不扣金額）
   if (chosenFreebieItems.length > 0) {
-    let freebieTotal = 0;
     let summary = {};
     chosenFreebieItems.forEach(id => {
-      freebieTotal += menu[id].price;
       summary[menu[id].name] = (summary[menu[id].name] || 0) + 1;
     });
-    discount = freebieTotal;
-    for (const name in summary) details.push(`🎁 贈品: ${name} x ${summary[name]}`);
+    for (const name in summary) {
+      details.push(`🎁 贈品: ${name} x ${summary[name]}`);
+    }
   }
 
-  const final = subtotal - discount;
-  let orderSummary = `--- 您的訂單明細 ---\n${details.join("\n")}\n------------------\n商品小計: $${subtotal} 元${
-    discount ? `\n買5送1折扣: -$${discount} 元` : ""
-  }\n總金額: $${final} 元\n------------------`;
+  // ✅ 贈品不影響金額
+  const final = subtotal;
+
+  // 🧾 訂單文字格式
+  let orderSummary = `--- 您的訂單明細 ---\n${details.join("\n")}\n------------------\n商品小計: $${subtotal} 元\n總金額: $${final} 元\n------------------`;
 
   const data = { customerName, orderSummary, totalPrice: final };
 
